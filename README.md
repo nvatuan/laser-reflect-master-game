@@ -1,4 +1,4 @@
-### This is a Java code-project that I will turn in as homework points
+### This is a Java code-project that I will turn in for homework points
 The requirements are:
 - Theres a GUI
 - Theres a Database and interaction between them
