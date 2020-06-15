@@ -9,6 +9,9 @@ public final class GamePieceMirror extends GamePiece {
 	public GamePieceMirror(boolean rot, int orient) {
 		super(GamePiece.PIECE_MIRROR, rot, orient);
 	}
+	public GamePieceMirror(GamePieceMirror ref) {
+		super((GamePiece)ref);
+	}
 	// -- Override
 	@Override
 	public LaserDirection bounce(LaserDirection arrived) {
@@ -41,5 +44,10 @@ public final class GamePieceMirror extends GamePiece {
 			this.orientation = (this.orientation + 1) % GamePiece.ORIENT_COUNT;
 		}
 		return this.rotatable;
+	}
+	
+	@Override
+	public GamePiece clone() {
+		return ((GamePiece) new GamePieceMirror(this));
 	}
 }

@@ -24,11 +24,16 @@ public abstract class GamePiece {
 		assert( (0 <= piece) && (piece <= GamePiece.PIECE_COUNT));
 		this.pieceID = piece;
 	}
+	GamePiece(GamePiece ref) {
+		this.pieceID = ref.pieceID;
+		this.rotatable = ref.rotatable;
+		this.orientation = ref.orientation;
+	}
 	
 	// -- getters
-	int getPieceID() { return this.pieceID; }
-	boolean getRotatable() { return this.rotatable; }
-	int getOrientation() { return this.orientation; }
+	public int getPieceID() { return this.pieceID; }
+	public boolean getRotatable() { return this.rotatable; }
+	public int getOrientation() { return this.orientation; }
 	
 	// -- hash generate function
 	public int getHash() {
@@ -53,4 +58,5 @@ public abstract class GamePiece {
 	// -- abstract methods
 	abstract public LaserDirection bounce(LaserDirection arrived);
 	abstract public boolean rotate();
+	abstract public GamePiece clone();
 }
