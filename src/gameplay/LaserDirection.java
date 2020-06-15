@@ -14,6 +14,8 @@ public class LaserDirection {
 		LaserLeft = new LaserDirection(D_STILL, D_LEFT);
 	
 	private Integer dx, dy;
+	public Integer getDx() { return this.dx; }
+	public Integer getDy() { return this.dy; }
 	
 	// -- Constructors
 	private LaserDirection(Integer ddx, Integer ddy) {
@@ -40,6 +42,9 @@ public class LaserDirection {
 		return (this.isStraight() && this.dy == LaserDirection.D_LEFT);
 	}
 	
+	public boolean isStuck() {
+		return (this.dx == 0 && this.dy == 0);
+	}
 	public boolean isWin() {
 		return (this.dx == LaserDirection.D_WIN) && (this.dy == LaserDirection.D_WIN);
 	}

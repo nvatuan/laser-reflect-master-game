@@ -16,6 +16,7 @@ public final class GamePieceProjector extends GamePiece {
 	// -- Override
 	@Override
 	public LaserDirection bounce(LaserDirection arrived) {
+		assert(arrived == null);
 		switch (this.orientation) {
 			case GamePiece.ORIENT_UP:
 				return new LaserDirection(LaserDirection.LaserUp);
@@ -44,7 +45,7 @@ public final class GamePieceProjector extends GamePiece {
 	
 	@Override
 	public String toString() {
-		String[] rep = {"O^", "O>", "Ov", "O<"};
+		String[] rep = {"P^", "P>", "Pv", "P<"};
 		return rep[this.orientation];
 	}
 }
