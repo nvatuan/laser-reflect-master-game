@@ -1,4 +1,6 @@
-package gameplay;
+package gamepiece;
+
+import gameplay.LaserDirection;
 
 abstract class GamePiece {
 	public static final int ORIENT_UP = 0, ORIENT_RIGHT = 1, ORIENT_DOWN = 2, ORIENT_LEFT = 3;

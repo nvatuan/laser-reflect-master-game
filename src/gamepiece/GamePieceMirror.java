@@ -1,4 +1,6 @@
-package gameplay;
+package gamepiece;
+
+import gameplay.LaserDirection;
 
 public final class GamePieceMirror extends GamePiece {
 	public GamePieceMirror() {

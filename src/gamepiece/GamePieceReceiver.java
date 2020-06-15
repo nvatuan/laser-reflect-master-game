@@ -1,4 +1,6 @@
-package gameplay;
+package gamepiece;
+
+import gameplay.LaserDirection;
 
 public final class GamePieceReceiver extends GamePiece {
 	public GamePieceReceiver() {

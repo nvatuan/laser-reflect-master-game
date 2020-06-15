@@ -1,4 +1,6 @@
-package gameplay;
+package gamepiece;
+
+import gameplay.LaserDirection;
 
 public class GamePieceWall extends GamePiece {
 	public GamePieceWall() {
