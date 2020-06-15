@@ -29,6 +29,6 @@ public class GamePieceEmpty extends GamePiece {
 	
 	@Override
 	public String toString() {
-		return "  ";
+		return "__";
 	}
 }

@@ -6,6 +6,10 @@ public abstract class GamePiece {
 	public static final int ORIENT_UP = 0, ORIENT_RIGHT = 1, ORIENT_DOWN = 2, ORIENT_LEFT = 3;
 	public static final int ORIENT_COUNT = 4;
 	
+	public static final String[] PIECE_NAME = new String[] {
+		"Projector", "Receiver", "Mirror", "Wall", "Empty"
+	};
+	
 	public static final int PIECE_PROJECTOR = 0, PIECE_RECEIVER = 1, PIECE_MIRROR = 2, PIECE_WALL = 3, PIECE_EMPTY = 4;
 	public static final int PIECE_COUNT = 5;
 	
@@ -36,7 +40,7 @@ public abstract class GamePiece {
 	public int getOrientation() { return this.orientation; }
 	
 	// -- hash generate function
-	public int getHash() {
+	public Integer getHash() {
 		int hash = 0;
 		int piece = this.getPieceID();
 		int orient = this.getOrientation();
@@ -53,6 +57,15 @@ public abstract class GamePiece {
 			hash += orient;
 			return hash;
 		}
+	}
+	
+	// -- methods
+	public void rotateAnyway() {
+		this.orientation = (this.orientation + 1) % GamePiece.ORIENT_COUNT;
+	}
+	
+	public String name() {
+		return GamePiece.PIECE_NAME[this.pieceID] + ", rotatable = " + this.rotatable; 
 	}
 	
 	// -- abstract methods

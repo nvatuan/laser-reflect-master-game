@@ -13,13 +13,21 @@ public class Level {
 	// int, int
 	public Level(int w, int h) {
 		this.width = w; this.height = h;
-		map = new GamePieceEmpty[w][h];
+		map = new GamePiece[h][w];
+		
+		for (int ih = 0; ih < height; ih ++)
+			for (int iw = 0; iw < width; iw++)
+				this.map[ih][iw] = new GamePieceEmpty();
 	}
 	// int, int, bool
 	public Level(int w, int h, boolean ed) {
 		this.width = w; this.height = h;
-		map = new GamePieceEmpty[w][h];
+		map = new GamePiece[h][w];
 		this.editable = ed;
+
+		for (int ih = 0; ih < height; ih ++)
+			for (int iw = 0; iw < width; iw++)
+				this.map[ih][iw] = new GamePieceEmpty();
 	}
 	
 	// map
@@ -37,7 +45,7 @@ public class Level {
 	// copy constructor
 	public Level(Level ref) {
 		this.width = ref.width; this.height = ref.height;
-		this.map = new GamePiece[width][height];
+		this.map = new GamePiece[height][width];
 		for (int ih = 0; ih < height; ih ++)
 			for (int iw = 0; iw < width; iw++)
 				this.map[ih][iw] = ref.map[ih][iw].clone();
@@ -48,6 +56,7 @@ public class Level {
 	private  int width, height;
 	//private  GamePiece[][] map;
 	public GamePiece[][] map;
+	private boolean editable = false;
 	
 	// please enforce these two to be equal
 	private int projectorCount, receiverCount;
@@ -55,14 +64,14 @@ public class Level {
 	private ArrayList<PairXY> projectorCoord = new ArrayList<PairXY>();
 	private ArrayList<PairXY> receiverCoord = new ArrayList<PairXY>();
 	
-	private boolean editable = false;
-	
 	private String levelDescription = "";
 	
 	// ====== general fields' getters and setters
 	
 	public int getWidth() { return this.width; }
 	public int getHeight() { return this.height; }
+	
+	public boolean getEditable() { return this.editable; }
 	
 	public int getProjectorCount() { return this.projectorCount; }
 	public int getReceiverCount() { return this.receiverCount; }
@@ -217,21 +226,11 @@ public class Level {
 		}
 	}
 	
-	public boolean launchEditor() {
-		// -- TODO: Add editor
-		return this.editable;
-	}
-	
 	public boolean launchPlay() {
 		if (this.solve() == false) return false;
 		// -- TODO:
 		
 		return true;
-	}
-	
-	// -- static methods
-	public static Level generate() {
-		return new Level();
 	}
 	
 	// -- overriden methods
