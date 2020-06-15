@@ -2,7 +2,7 @@ package gamepiece;
 
 import gameplay.LaserDirection;
 
-abstract class GamePiece {
+public abstract class GamePiece {
 	public static final int ORIENT_UP = 0, ORIENT_RIGHT = 1, ORIENT_DOWN = 2, ORIENT_LEFT = 3;
 	public static final int ORIENT_COUNT = 4;
 	
