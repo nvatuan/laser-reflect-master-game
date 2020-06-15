@@ -31,4 +31,10 @@ public final class GamePieceReceiver extends GamePiece {
 	public GamePiece clone() {
 		return ((GamePiece) new GamePieceReceiver(this));
 	}
+	
+	@Override
+	public String toString() {
+		String[] rep = {"R^", "R>", "Rv", "R<"};
+		return rep[this.orientation];
+	}
 }

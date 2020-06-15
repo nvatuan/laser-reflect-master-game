@@ -41,4 +41,10 @@ public final class GamePieceProjector extends GamePiece {
 	public GamePiece clone() {
 		return ((GamePiece) new GamePieceProjector(this));
 	}
+	
+	@Override
+	public String toString() {
+		String[] rep = {"O^", "O>", "Ov", "O<"};
+		return rep[this.orientation];
+	}
 }

@@ -38,6 +38,7 @@ public final class GamePieceMirror extends GamePiece {
 		}
 	}
 	
+	// -- Overriden methods
 	@Override
 	public boolean rotate() {
 		if (this.rotatable) {
@@ -49,5 +50,11 @@ public final class GamePieceMirror extends GamePiece {
 	@Override
 	public GamePiece clone() {
 		return ((GamePiece) new GamePieceMirror(this));
+	}
+	
+	@Override
+	public String toString() {
+		String[] rep = {"|\\", "|/", "\\|", "/|"};
+		return rep[this.orientation];
 	}
 }

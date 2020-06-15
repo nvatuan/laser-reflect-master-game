@@ -26,4 +26,9 @@ public class GamePieceEmpty extends GamePiece {
 	public GamePiece clone() {
 		return ((GamePiece) new GamePieceEmpty(this));
 	}
+	
+	@Override
+	public String toString() {
+		return "  ";
+	}
 }

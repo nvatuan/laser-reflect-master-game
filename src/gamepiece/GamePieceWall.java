@@ -25,4 +25,9 @@ public class GamePieceWall extends GamePiece {
 	public GamePiece clone() {
 		return ((GamePiece) new GamePieceWall(this));
 	}
+	
+	@Override
+	public String toString() {
+		return "##";
+	}
 }

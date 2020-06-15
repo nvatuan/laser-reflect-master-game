@@ -50,6 +50,8 @@ public class Level {
 	private PairXY[] receiverCoord;
 	
 	private boolean editable = false;
+	
+	private String levelDescription = "";
 	// -- getters
 	public int getWidth() { return this.width; }
 	public int getHeight() { return this.height; }
@@ -79,9 +81,30 @@ public class Level {
 		return true;
 	}
 	
-	
 	// -- static methods
 	public static Level generate() {
 		return new Level();
+	}
+	
+	// -- overriden methods
+	@Override
+	public String toString() {
+		String prefix =   "Level Description: " + this.levelDescription + "\n"
+							+ "Width = " + this.width + " | Height = " + this.height + "\n"
+							+ "Map = {" + "\n";
+		String surfix = "}";
+		// --
+		String rep = prefix;
+		for (int ih = 0; ih < this.height; ih++) {
+			for (int iw = 0; iw < this.width; iw++) {
+				rep += this.map[ih][iw].toString();
+				if (iw + 1 < this.width) rep += " ";
+				else rep += "\n";
+			}
+			if (ih + 1 < this.height) rep += "\n";
+		}
+		rep += surfix;
+		//
+		return rep;
 	}
 }
