@@ -19,15 +19,15 @@ public final class GamePieceProjector extends GamePiece {
 		assert(arrived == null);
 		switch (this.orientation) {
 			case GamePiece.ORIENT_UP:
-				return new LaserDirection(LaserDirection.LaserUp);
+				return LaserDirection.LaserUp;
 			case GamePiece.ORIENT_RIGHT:
-				return new LaserDirection(LaserDirection.LaserRight);
+				return LaserDirection.LaserRight;
 			case GamePiece.ORIENT_DOWN:
-				return new LaserDirection(LaserDirection.LaserDown);
+				return LaserDirection.LaserDown;
 			case GamePiece.ORIENT_LEFT:
-				return new LaserDirection(LaserDirection.LaserLeft);
+				return LaserDirection.LaserLeft;
 			default:
-				return new LaserDirection(LaserDirection.LaserLose);
+				return LaserDirection.LaserLose;
 		}
 	}
 	

@@ -16,7 +16,13 @@ public final class GamePieceReceiver extends GamePiece {
 	// -- Override
 	@Override
 	public LaserDirection bounce(LaserDirection arrived) {
-		return new LaserDirection(LaserDirection.LaserWin);
+		boolean flag = false;
+		flag |= (arrived.isUp() && (this.getOrientation() == GamePiece.ORIENT_UP));
+		flag |= (arrived.isRight() && (this.getOrientation() == GamePiece.ORIENT_RIGHT));
+		flag |= (arrived.isDown() && (this.getOrientation() == GamePiece.ORIENT_DOWN));
+		flag |= (arrived.isLeft() && (this.getOrientation() == GamePiece.ORIENT_LEFT));
+		if (flag) return new LaserDirection(LaserDirection.LaserWin);
+		return new LaserDirection(LaserDirection.LaserLose);
 	}
 	
 	@Override

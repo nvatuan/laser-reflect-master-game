@@ -6,6 +6,9 @@ public final class GamePieceMirror extends GamePiece {
 	public GamePieceMirror() {
 		super(GamePiece.PIECE_MIRROR, true, GamePiece.ORIENT_UP);
 	}
+	public GamePieceMirror(int orient) {
+		super(GamePiece.PIECE_MIRROR, true, orient);
+	}
 	public GamePieceMirror(boolean rot, int orient) {
 		super(GamePiece.PIECE_MIRROR, rot, orient);
 	}
@@ -15,27 +18,28 @@ public final class GamePieceMirror extends GamePiece {
 	// -- Override
 	@Override
 	public LaserDirection bounce(LaserDirection arrived) {
+		LaserDirection next = LaserDirection.LaserLose;
 		switch(this.orientation) {
 			case GamePiece.ORIENT_UP:
-				if (arrived.isDown()) return new LaserDirection(LaserDirection.LaserRight);
-				if (arrived.isLeft()) return new LaserDirection(LaserDirection.LaserUp);
-				return new LaserDirection(LaserDirection.LaserLose);
+				if (arrived.isDown()) next = LaserDirection.LaserRight;
+				if (arrived.isLeft()) next = LaserDirection.LaserUp;
+				break;
 			case GamePiece.ORIENT_RIGHT:
-				if (arrived.isRight()) return new LaserDirection(LaserDirection.LaserDown);
-				if (arrived.isUp()) return new LaserDirection(LaserDirection.LaserRight);
-				return new LaserDirection(LaserDirection.LaserLose);
+				if (arrived.isLeft()) next = LaserDirection.LaserDown;
+				if (arrived.isUp()) next = LaserDirection.LaserRight;
+				break;
 			case GamePiece.ORIENT_DOWN:
-				if (arrived.isUp()) return new LaserDirection(LaserDirection.LaserLeft);
-				if (arrived.isRight()) return new LaserDirection(LaserDirection.LaserDown);
-				return new LaserDirection(LaserDirection.LaserLose);
+				if (arrived.isUp()) next = LaserDirection.LaserLeft;
+				if (arrived.isRight()) next = LaserDirection.LaserDown;
+				break;
 			case GamePiece.ORIENT_LEFT:
-				if (arrived.isRight()) return new LaserDirection(LaserDirection.LaserUp);
-				if (arrived.isDown()) return new LaserDirection(LaserDirection.LaserLeft);
-				return new LaserDirection(LaserDirection.LaserLose);
+				if (arrived.isRight()) next = LaserDirection.LaserUp;
+				if (arrived.isDown()) next = LaserDirection.LaserLeft;
+				break;
 			default:
-				return new LaserDirection(LaserDirection.LaserLose);
-				
+				break;
 		}
+		return next;
 	}
 	
 	// -- Overriden methods

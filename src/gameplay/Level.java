@@ -3,7 +3,6 @@ package gameplay;
 import gamepiece.*;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import datastruct.PairXY;
 
@@ -100,30 +99,34 @@ public class Level {
 	}
 	
 	// -- solution debugging related
-	private String hasSolutionDebug = null;
+	private String solveDebug = null;
 	public String getHasSolutionDebug() {
-		if (hasSolutionDebug == null) hasSolution();
-		return hasSolutionDebug;
+		if (solveDebug == null) solve();
+		return solveDebug;
 	}
 	
 	// -- DFS looking for solution
 	// sol related fields
-	private Stack<PairXY> bouncedMirror = new Stack<PairXY>();
-	private Stack<Integer> bouncedMirrorOrientation = new Stack<Integer>();
+	private ArrayList<ArrayList<PairXY>> solvedMirror = new ArrayList<ArrayList<PairXY>>();
+	private ArrayList<ArrayList<Integer>> solvedMirrorOrientation = new ArrayList<ArrayList<Integer>>();
+	public int solvedMirrorSize = 0;
 	
-	public  Stack<PairXY> getBouncedMirror() { return this.bouncedMirror; }
-	public  Stack<Integer> getBouncedMirrorOrientation() { return this.bouncedMirrorOrientation; }
+	public  ArrayList<PairXY> getsolvedMirror(int idx) { return this.solvedMirror.get(idx); }
+	public  ArrayList<Integer> getsolvedMirrorOrientation(int idx) { return this.solvedMirrorOrientation.get(idx); }
 
 	// methods
 	private boolean[][] visited = new boolean[0][0];
 	private boolean findSolution(LaserDirection cursor, boolean[][] locked, int X, int Y, boolean init) {
 		if (init) {
-			bouncedMirror.clear();
-			bouncedMirrorOrientation.clear();
-			visited = new boolean[width][height];
+			solvedMirror.add(new ArrayList<PairXY>());
+			solvedMirrorOrientation.add(new ArrayList<Integer>());
+			solvedMirrorSize++;
+			visited = new boolean[height][width];
 		}
 		// -- check W/L conditions
 		assert(!cursor.isStuck());
+		//System.out.println("@findSolution: X = " + X + " | Y = " + Y);
+		//System.out.println(cursor.toString());
 		
 		visited[X][Y] = true;
 		if (cursor.isWin()) return true;
@@ -149,8 +152,8 @@ public class Level {
 				LaserDirection newCursor = piece.bounce(cursor);
 				// -- try
 				if (findSolution(newCursor, locked, newX, newY, false)) {
-					bouncedMirror.add(new PairXY(newX, newY));
-					bouncedMirrorOrientation.add(Integer.valueOf(piece.getOrientation()));
+					solvedMirror.get(solvedMirrorSize - 1).add(new PairXY(newX, newY));
+					solvedMirrorOrientation.get(solvedMirrorSize - 1).add(Integer.valueOf(piece.getOrientation()));
 					locked[newX][newY] = true;
 					return true;
 				}
@@ -166,7 +169,7 @@ public class Level {
 	
 	// -- count how may solutions this level has, zero if impossible.
 	//public int countSolution() {
-	public boolean hasSolution() {
+	public boolean solve() {
 		updateProjectorData();
 		updateReceiverData();		
 		// with countless times of testing, thesis stating and attempt proving,
@@ -180,7 +183,12 @@ public class Level {
 		for (int ih = 0; ih < height; ih ++)
 			for (int iw = 0; iw < width; iw++)
 				locked[ih][iw] = (!this.map[ih][iw].getRotatable());
-		
+		// -- resets something
+		solvedMirror.clear();
+		solvedMirrorOrientation.clear();
+		solvedMirrorSize = 0;
+	
+		// runs
 		for (int i = 0; i < this.projectorCount; i++) {
 			int ih = projectorCoord.get(i).X;
 			int iw = projectorCoord.get(i).Y;
@@ -193,13 +201,29 @@ public class Level {
 		return true;
 	}
 	
+	// -- write solution to level
+	public void writeSolutionToMap() {
+		for (int i = 0; i < this.solvedMirrorSize; i++) {
+			ArrayList<PairXY> mirror = this.getsolvedMirror(i);
+			ArrayList<Integer> mirrorOrient = this.getsolvedMirrorOrientation(i);
+			
+			for (int mirr = 0; mirr < mirror.size(); mirr++) {
+				int X = mirror.get(mirr).X;
+				int Y = mirror.get(mirr).Y;
+				int Orient = mirrorOrient.get(mirr);
+				//
+				while (this.map[X][Y].getOrientation() != Orient) this.map[X][Y].rotate();
+			}
+		}
+	}
+	
 	public boolean launchEditor() {
 		// -- TODO: Add editor
 		return this.editable;
 	}
 	
 	public boolean launchPlay() {
-		if (this.hasSolution() == false) return false;
+		if (this.solve() == false) return false;
 		// -- TODO:
 		
 		return true;

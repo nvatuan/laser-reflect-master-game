@@ -25,6 +25,35 @@ public class LaserDirection {
 		this.dx = ref.dx;
 		this.dy = ref.dy;
 	}
+	// -- methods
+	public LaserDirection flip() {
+		if (this.equals(LaserUp)) return LaserDown;
+		if (this.equals(LaserDown)) return LaserUp;
+		if (this.equals(LaserLeft)) return LaserRight;
+		if (this.equals(LaserRight)) return LaserLeft;
+		return this;
+	}
+	
+	// -- equals
+	@Override
+	public boolean equals(Object obj) {
+		LaserDirection o = ((LaserDirection) obj);
+		if (this.dx == o.dx && this.dy == o.dy) return true;
+		return false;
+	}
+	
+	// -- toString	
+	@Override
+	public String toString() {
+		if (this.equals(LaserDirection.LaserUp)) return "LaserUp";
+		if (this.equals(LaserDirection.LaserRight)) return "LaserRight";
+		if (this.equals(LaserDirection.LaserDown)) return "LaserDown";
+		if (this.equals(LaserDirection.LaserLeft)) return "LaserLeft";
+		if (this.equals(LaserDirection.LaserWin)) return "LaserWin";
+		if (this.equals(LaserDirection.LaserLose)) return "LaserLose";
+		return "Invalid Laser";
+	}
+	
 	// -- LaserDirection boolean checker functions
 	public boolean isStraight() {
 		return ((this.dx * this.dy == 0) && (this.dx != this.dy));
