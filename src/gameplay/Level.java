@@ -2,6 +2,7 @@ package gameplay;
 
 import gamepiece.*;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -228,20 +229,22 @@ public class Level {
 	}
 	
 	// -- actual playing methods	
+	private LaserDirection[][] laserMap = null;
+	
 	public boolean launchPlay() {
 		if (this.solve() == false) {
 			System.out.println("!!! This Level is impossible.");
 			return false;
 		}
 		// -- 
-		LaserDirection[][] laser = new LaserDirection[height][width];
+		laserMap = new LaserDirection[height][width];
 		for (int ih = 0; ih < height; ih++)
 			for (int iw = 0; iw < width; iw++)
-				laser[ih][iw] = LaserDirection.LaserLose;
+				laserMap[ih][iw] = LaserDirection.LaserLose;
 		
 		int status = Level.STATUS_ONGOING;
 		while (status == Level.STATUS_ONGOING) {
-			status = this.testSolution(laser);
+			status = this.testSolution(laserMap);
 			if (status == Level.STATUS_WIN) {
 				win();
 				break;
@@ -250,7 +253,7 @@ public class Level {
 			System.out.println("Laser =");
 			for (int ih = 0; ih < height; ih++)
 				for (int iw = 0; iw < width; iw++) {
-					System.out.print(laser[ih][iw] + " ");
+					System.out.print(laserMap[ih][iw] + " ");
 					if (iw + 1 == width) System.out.println("");
 				}
 			
