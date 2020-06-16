@@ -35,7 +35,12 @@ public class ScreenClickHandler extends MouseAdapter {
 		//JOptionPane.showMessageDialog(null, "ROW = " + r + " | COL = " + c);
 
 		if (container.editMode) {
-			
+			if (e.getButton() == MouseEvent.BUTTON1) {
+				
+			}
+			if (e.getButton() == MouseEvent.BUTTON2) {
+				
+			}
 		} else {
 			if(container.lvl.map[r][c].rotate() == false) {
 				JOptionPane.showMessageDialog(null, "This piece is locked! It can't be rotate");
