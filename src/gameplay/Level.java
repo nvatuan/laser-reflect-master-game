@@ -226,14 +226,48 @@ public class Level {
 		}
 	}
 	
+	
+	// -- actual playing methods	
 	public boolean launchPlay() {
 		if (this.solve() == false) return false;
-		// -- TODO:
+		// -- 
+		LaserDirection[][] laser = new LaserDirection[height][width];
+		for (int ih = 0; ih < height; ih++)
+			for (int iw = 0; iw < width; iw++)
+				laser[ih][iw] = LaserDirection.LaserLose;
+		
+		int status = Level.STATUS_ONGOING;
+		while (status == Level.STATUS_ONGOING) {
+			status = this.testSolution(laser);
+			if (status == Level.STATUS_WIN) {
+				win();
+				break;
+			}
+		}
 		
 		return true;
 	}
 	
-	// -- overriden methods
+	public boolean issueCommand(String[] inputs) {
+		if (inputs[0].equals("EXIT")) {
+			System.out.println("Exiting..");
+			return true;
+		}
+		//
+		return false;
+	}
+	
+	public static final int STATUS_ONGOING = 0, STATUS_WIN = 1;
+	public int testSolution(LaserDirection[][] laser) {
+		// TODO:
+		return 0;
+	}
+	
+	public void win() {
+		// TODO:
+	}
+	
+	// -- overridden methods
 	@Override
 	public String toString() {
 		String prefix =   "Level Description: " + this.levelDescription + "\n"

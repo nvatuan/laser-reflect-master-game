@@ -1,8 +1,11 @@
 package gamepiece;
 
+import java.util.ArrayList;
+
 import gameplay.LaserDirection;
 
 public abstract class GamePiece {
+	// -- Global variables
 	public static final int ORIENT_UP = 0, ORIENT_RIGHT = 1, ORIENT_DOWN = 2, ORIENT_LEFT = 3;
 	public static final int ORIENT_COUNT = 4;
 	
@@ -13,6 +16,37 @@ public abstract class GamePiece {
 	public static final int PIECE_PROJECTOR = 0, PIECE_RECEIVER = 1, PIECE_MIRROR = 2, PIECE_WALL = 3, PIECE_EMPTY = 4;
 	public static final int PIECE_COUNT = 5;
 	
+	private static boolean _init = false; 
+	private static ArrayList<GamePiece> ListOfUniqueGamePiece = null;
+	private static int UniqueGamePieceCount = 0;
+	
+	public static ArrayList<GamePiece> getListOfUniqueGamePiece() {
+		init();
+		return GamePiece.ListOfUniqueGamePiece;
+	}
+	
+	public static int getUniqueGamePieceCount() {
+		init();
+		return GamePiece.UniqueGamePieceCount;
+	}
+	
+	public static void init() {
+		if (!_init) {
+			ListOfUniqueGamePiece = new ArrayList<GamePiece>();
+			//hashToPiece = new HashMap<Integer, GamePiece>();
+			
+			ListOfUniqueGamePiece.add(new GamePieceProjector());
+			ListOfUniqueGamePiece.add(new GamePieceReceiver());
+			ListOfUniqueGamePiece.add(new GamePieceMirror(false));
+			ListOfUniqueGamePiece.add(new GamePieceMirror(true));
+			ListOfUniqueGamePiece.add(new GamePieceWall());
+			ListOfUniqueGamePiece.add(new GamePieceEmpty());
+			
+			UniqueGamePieceCount = ListOfUniqueGamePiece.size();
+			_init = true;
+		}
+	}
+	// -- members
 	int pieceID;
 	boolean rotatable;
 	int		orientation;
