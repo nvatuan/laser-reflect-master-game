@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gameplay.Level;
+import test.Stages;
 import test.Tests;
 
 @SuppressWarnings("serial")
@@ -18,7 +19,7 @@ public class ScreenPanel extends JPanel {
 	
 	public ScreenPanel() {
 		super();
-		switchLevel(Tests.TestRand());
+		switchLevel(Stages.Stage1());
 	}
 	public ScreenPanel(Level ref) {
 		super();

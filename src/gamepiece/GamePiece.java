@@ -13,8 +13,8 @@ public abstract class GamePiece {
 		"Projector", "Receiver", "Mirror", "Wall", "Empty"
 	};
 	
-	public static final int PIECE_PROJECTOR = 0, PIECE_RECEIVER = 1, PIECE_MIRROR = 2, PIECE_WALL = 3, PIECE_EMPTY = 4;
-	public static final int PIECE_COUNT = 5;
+	public static final int PIECE_PROJECTOR = 0, PIECE_RECEIVER = 1, PIECE_MIRROR = 2,  PIECE_MIRROR_LOCKED = 3, PIECE_WALL = 4, PIECE_EMPTY = 5;
+	public static final int PIECE_COUNT = 6;
 	
 	private static boolean _init = false; 
 	private static ArrayList<GamePiece> ListOfUniqueGamePiece = null;

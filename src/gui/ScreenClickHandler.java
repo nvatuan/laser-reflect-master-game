@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import gamepiece.GamePiece;
 import gameplay.LaserDirection;
 import gameplay.Level;
 
@@ -39,7 +40,7 @@ public class ScreenClickHandler extends MouseAdapter {
 				
 			}
 			if (e.getButton() == MouseEvent.BUTTON2) {
-				
+				container.lvl.map[r][c] = GamePiece.nextGamePiece(container.lvl.map[r][c].getPieceID());
 			}
 		} else {
 			if(container.lvl.map[r][c].rotate() == false) {

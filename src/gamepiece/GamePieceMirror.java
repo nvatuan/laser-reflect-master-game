@@ -10,7 +10,10 @@ public final class GamePieceMirror extends GamePiece {
 		super(GamePiece.PIECE_MIRROR, true, orient);
 	}
 	public GamePieceMirror(boolean rot) {
-		super(GamePiece.PIECE_MIRROR, rot, GamePiece.ORIENT_UP);
+		super(
+			(rot ? GamePiece.PIECE_MIRROR : GamePiece.PIECE_MIRROR_LOCKED),
+			rot, GamePiece.ORIENT_UP
+		);
 	}
 	public GamePieceMirror(boolean rot, int orient) {
 		super(GamePiece.PIECE_MIRROR, rot, orient);

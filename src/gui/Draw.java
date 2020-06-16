@@ -121,14 +121,6 @@ public class Draw {
 		g.setColor(Color.WHITE);
 		g.drawRect(sY, sX, eY, eX);
 
-//		g.setColor(Color.GRAY);
-//		for (int i = 1; i < h; i++) {
-//			g.drawLine(sY, sX + grid*i, eY + offsetY, sX + grid*i);
-//		}
-//		
-//		for (int i = 1; i < w; i++) {
-//			g.drawLine(sY + grid*i, sX, sY + grid*i, eX + offsetX);
-//		}
 		// --
 		int delta = grid - pieceIcon.get(map[0][0].getHash()).getIconHeight();
 		if (delta < 10) delta = 10;
