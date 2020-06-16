@@ -1,4 +1,4 @@
-package gui;
+package event;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import gamepiece.GamePiece;
 import gameplay.LaserDirection;
 import gameplay.Level;
+import gui.ScreenPanel;
 
 public class ScreenClickHandler extends MouseAdapter {
 	ScreenPanel container;

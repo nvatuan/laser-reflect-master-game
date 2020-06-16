@@ -133,9 +133,9 @@ public class Draw {
 //				System.out.print(map[ih][iw].getHash() + " ");
 //				if (iw + 1 == w) System.out.println("");
 				
-				System.out.println(map[ih][iw].getHash());
+				//System.out.println(map[ih][iw].getHash());
 				ImageIcon icon = pieceIcon.get(map[ih][iw].getHash());
-				System.out.println(icon == null);
+				//System.out.println(icon == null);
 				int x1 = ((iw * grid)) + offsetX;
 				int y1 = ((ih * grid)) + offsetY;
 				int x2 = x1 + grid;

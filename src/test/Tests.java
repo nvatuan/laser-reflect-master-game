@@ -164,7 +164,7 @@ public class Tests {
 	}
 	
 	public static Level TestRand() {
-		int size = 8;
+		int size = 4;
 		GamePiece[][] M = new GamePiece[size][size];
 		Random rnd = new Random();
 		

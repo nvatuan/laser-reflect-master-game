@@ -1,6 +1,9 @@
 package gamepiece;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import gameplay.LaserDirection;
 
@@ -30,6 +33,11 @@ public abstract class GamePiece {
 		return GamePiece.UniqueGamePieceCount;
 	}
 	
+	private static HashMap<Integer, GamePiece> hashToPiece = new HashMap<Integer, GamePiece>();
+	public static HashMap<Integer, GamePiece> getHashToPiece() {
+		init();
+		return hashToPiece;
+	}
 	public static void init() {
 		if (!_init) {
 			ListOfUniqueGamePiece = new ArrayList<GamePiece>();
@@ -42,6 +50,17 @@ public abstract class GamePiece {
 			ListOfUniqueGamePiece.add(new GamePieceEmpty());
 			
 			UniqueGamePieceCount = ListOfUniqueGamePiece.size();
+			// --
+			for (int idx = 0; idx < UniqueGamePieceCount; idx++) {
+				GamePiece p = ListOfUniqueGamePiece.get(idx);
+				for (int ir = 0; ir < 4; ir++) {
+					GamePiece piece = p.clone();
+					hashToPiece.put(piece.getHash(), piece);
+					piece.rotateAnyway();
+					p = piece;
+				}
+			}			
+			
 			_init = true;
 		}
 	}
@@ -104,14 +123,23 @@ public abstract class GamePiece {
 	// -- static methods
 	public static GamePiece nextGamePiece(int hash) {
 		init();
+		Set<Integer> s = hashToPiece.keySet();
+		Iterator<Integer> it = s.iterator();
 		
-		for (int i = 0; i < UniqueGamePieceCount; i++) {
-			System.out.print(ListOfUniqueGamePiece.get(i).getHash() + " ");
-			if (ListOfUniqueGamePiece.get(i).getHash() == hash) {
-				int idx = (i + 1) % UniqueGamePieceCount;
-				return GamePiece.ListOfUniqueGamePiece.get(idx).clone();
+		int[] hsh = new int[s.size()];
+		int idx = 0;
+		while (it.hasNext()) {
+			hsh[idx] = it.next();
+			idx++;
+		}
+		
+		for (int i = 0; i < hsh.length; i++) {
+			if (hsh[i] == hash) {
+				int ii = (i + 1) % hsh.length;
+				return hashToPiece.get(hsh[ii]).clone();
 			}
 		}
+				
 		return null;
 	}
 	

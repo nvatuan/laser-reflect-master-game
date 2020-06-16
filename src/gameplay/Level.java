@@ -59,6 +59,8 @@ public class Level {
 	private  int width, height;
 	//private  GamePiece[][] map;
 	public GamePiece[][] map;
+	
+	public GamePiece[][] getMap() { return this.map; }
 	private boolean editable = false;
 	
 	// please enforce these two to be equal
