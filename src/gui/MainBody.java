@@ -17,6 +17,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+
+import test.Tests;
+
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.SwingConstants;
@@ -28,6 +31,8 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainBody extends JFrame {
 
@@ -52,7 +57,10 @@ public class MainBody extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	UI_Panel panelUI;
+	
 	public MainBody() {
+		setTitle("Game?");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -96,6 +104,11 @@ public class MainBody extends JFrame {
 		panelLevels.setLayout(new GridLayout(1, 5, 2, 0));
 		
 		JButton btnLevel1 = new JButton("1");
+		btnLevel1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelUI.switchLevel(Tests.Test1());
+			}
+		});
 		btnLevel1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLevel1.setBackground(SystemColor.controlHighlight);
 		btnLevel1.setMargin(new Insets(0, 0, 0, 0));
@@ -103,6 +116,11 @@ public class MainBody extends JFrame {
 		panelLevels.add(btnLevel1);
 		
 		JButton btnLevel2 = new JButton("2");
+		btnLevel2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelUI.switchLevel(Tests.Test2());
+			}
+		});
 		btnLevel2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLevel2.setBackground(SystemColor.controlHighlight);
 		btnLevel2.setMargin(new Insets(0, 0, 0, 0));
@@ -110,6 +128,11 @@ public class MainBody extends JFrame {
 		panelLevels.add(btnLevel2);
 		
 		JButton btnLevel3 = new JButton("3");
+		btnLevel3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelUI.switchLevel(Tests.Test3());
+			}
+		});
 		btnLevel3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLevel3.setBackground(SystemColor.controlHighlight);
 		btnLevel3.setMargin(new Insets(0, 0, 0, 0));
@@ -180,7 +203,7 @@ public class MainBody extends JFrame {
 		lblOther.setAlignmentX(0.5f);
 		panelOther.add(lblOther);
 		
-		JPanel panelUI = new JPanel();
+		panelUI = new UI_Panel();
 		panelUI.setBorder(new LineBorder(SystemColor.info, 3));
 		
 		contentPane.add(panelUI, BorderLayout.CENTER);

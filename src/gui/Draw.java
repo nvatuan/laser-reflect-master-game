@@ -102,53 +102,52 @@ public class Draw {
 	}
 	
 	//
-	public final int width = 500, height = 500;
+	public final int grid = 100;
 	public static final int offsetX = 5, offsetY = 5;
 	// -- draw
 	public BufferedImage drawMap(GamePiece[][] map) {
 		importGamePieceImage();
 		//
-		BufferedImage mapImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics g = mapImg.getGraphics();
-		//
-		int sX = offsetX, sY = offsetY;
-		int eX = width - offsetX*2, eY = height - offsetY*2;
-		
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, width, height);
-		// -------- Draw grid
 		int h = map.length; int w = map[0].length;
-		double dr, dc;
-		dr = (eX - sX)*1.0/h;
-		dc = (eY - sY)*1.0/w;
+		
+		int sX = offsetX, sY = offsetY;
+		int eX = h*grid, eY = w*grid;
+		
+		BufferedImage mapImg = new BufferedImage(w*grid + offsetY*2, h*grid + offsetX*2, BufferedImage.TYPE_INT_RGB);
+		Graphics g = mapImg.getGraphics();
+		
+		// -------- Draw grid
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, w*grid + offsetY*2, h*grid + offsetX*2);
 		
 		g.setColor(Color.RED);
-		g.drawRect(sX, sY, eX, eY);
-		
-		double dx = dr;
+		g.drawRect(sY, sX, eY, eX);
+
 		for (int i = 1; i < h; i++) {
-			g.drawLine(sX, (int) (dx+0.5), eX + offsetX, (int)(dx + 0.5));
-			dx += dr;
+			g.drawLine(sY, sX + grid*i, eY + offsetY, sX + grid*i);
 		}
-		double dy = dc;
+		
 		for (int i = 1; i < w; i++) {
-			g.drawLine((int) (dy+0.5), sY, (int)(dy + 0.5), eY + offsetY);
-			dy += dc;
+			g.drawLine(sY + grid*i, sX, sY + grid*i, eX + offsetX);
 		}
 		// --
+		int delta = grid - pieceIcon.get(map[0][0].getHash()).getIconHeight();
+		if (delta < 10) delta = 10;
+		int gridOffset = delta/2;
+		
 		for (int ih = 0; ih < h; ih++) {
 			for (int iw = 0; iw < w; iw++) {
 				System.out.print(map[ih][iw].getHash() + " ");
 				if (iw + 1 == w) System.out.println("");
 				
 				ImageIcon icon = pieceIcon.get(map[ih][iw].getHash());
-				int x1 = ((int) (iw * dc));
-				int y1 = ((int) (ih * dr));
-				int x2 = x1 + ((int) dc);
-				int y2 = y1 + ((int) dr);
+				int x1 = ((iw * grid)) + offsetX;
+				int y1 = ((ih * grid)) + offsetY;
+				int x2 = x1 + grid;
+				int y2 = y1 + grid;
 				
 				g.drawImage(icon.getImage(),
-						x1 + 10, y1 + 10, x2 - 10, y2 - 10,
+						x1 + gridOffset, y1 + gridOffset, x2 - gridOffset, y2 - gridOffset,
 						5, 5, icon.getIconWidth() - 5, icon.getIconHeight() - 5,
 				null);
 				//JOptionPane.showMessageDialog(null, "" + "x1 = " + x1 + " | y1 = " + y1 + " | x2 = " +  x2 + " | y2 = "+ y2);

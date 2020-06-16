@@ -28,7 +28,7 @@ public class TestDraw extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		Level debug = Tests.Test5();
+		Level debug = Tests.Test2();
 		System.out.println(debug);
 		new TestDraw(debug);
 	}
