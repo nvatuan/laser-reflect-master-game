@@ -75,6 +75,7 @@ public class Draw {
 				pieceIcon.put(mirR.getHash(), MirrorRight);
 				pieceIcon.put(mirD.getHash(), MirrorDown);
 				pieceIcon.put(mirL.getHash(), MirrorLeft);
+				//System.out.println("HASH DEBUG: \n" + mirU.getHash() + " " + mirR.getHash() + " " + mirD.getHash() + " " + mirL.getHash());
 				
 				GamePieceMirror mirUL = new GamePieceMirror(false, GamePiece.ORIENT_UP); 
 				GamePieceMirror mirRL = new GamePieceMirror(false, GamePiece.ORIENT_RIGHT);
@@ -84,6 +85,7 @@ public class Draw {
 				pieceIcon.put(mirRL.getHash(), MirrorRightLocked);
 				pieceIcon.put(mirDL.getHash(), MirrorDownLocked);
 				pieceIcon.put(mirLL.getHash(), MirrorLeftLocked);
+				//System.out.println("HASH DEBUG: \n" + mirUL.getHash() + " " + mirRL.getHash() + " " + mirDL.getHash() + " " + mirLL.getHash());
 				
 				GamePieceEmpty empt = new GamePieceEmpty();
 				pieceIcon.put(empt.getHash(), Empty);
@@ -128,10 +130,12 @@ public class Draw {
 		
 		for (int ih = 0; ih < h; ih++) {
 			for (int iw = 0; iw < w; iw++) {
-				//System.out.print(map[ih][iw].getHash() + " ");
-				//if (iw + 1 == w) System.out.println("");
+//				System.out.print(map[ih][iw].getHash() + " ");
+//				if (iw + 1 == w) System.out.println("");
 				
+				System.out.println(map[ih][iw].getHash());
 				ImageIcon icon = pieceIcon.get(map[ih][iw].getHash());
+				System.out.println(icon == null);
 				int x1 = ((iw * grid)) + offsetX;
 				int y1 = ((ih * grid)) + offsetY;
 				int x2 = x1 + grid;

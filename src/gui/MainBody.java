@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -187,8 +188,9 @@ public class MainBody extends JFrame {
 		JButton btnEditMode = new JButton("ENABLE EDIT MODE");
 		btnEditMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelUI.editMode = true;
 				panelUI.switchLevel(new Level(6, 6));
+				panelUI.editMode = true;
+				JOptionPane.showMessageDialog(null, "Welcome to Level Maker\n" + "use Mouse1 and Mouse2 to edit tiles\n" + "Map's size is locked at 6x6.");
 			}
 		});
 		btnEditMode.setBackground(SystemColor.controlHighlight);
@@ -197,7 +199,7 @@ public class MainBody extends JFrame {
 		btnEditMode.setMargin(new Insets(0, 0, 0, 0));
 		panelEditor.add(btnEditMode);
 		
-		JButton btnSaveLoad = new JButton("SAVE / LOAD");
+		JButton btnSaveLoad = new JButton("TEST LEVEL");
 		btnSaveLoad.setBackground(SystemColor.controlHighlight);
 		btnSaveLoad.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnSaveLoad.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -214,7 +216,7 @@ public class MainBody extends JFrame {
 		JPanel panelOther = new JPanel();
 		navPanel.add(panelOther);
 		
-		JLabel lblOther = new JLabel("OTHER");
+		JLabel lblOther = new JLabel("DATABASE");
 		lblOther.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblOther.setAlignmentX(0.5f);
 		panelOther.add(lblOther);

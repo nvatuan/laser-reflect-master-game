@@ -10,7 +10,7 @@ public abstract class GamePiece {
 	public static final int ORIENT_COUNT = 4;
 	
 	public static final String[] PIECE_NAME = new String[] {
-		"Projector", "Receiver", "Mirror", "Wall", "Empty"
+		"Projector", "Receiver", "Mirror", "MirrorLocked", "Wall", "Empty"
 	};
 	
 	public static final int PIECE_PROJECTOR = 0, PIECE_RECEIVER = 1, PIECE_MIRROR = 2,  PIECE_MIRROR_LOCKED = 3, PIECE_WALL = 4, PIECE_EMPTY = 5;
@@ -36,8 +36,8 @@ public abstract class GamePiece {
 			
 			ListOfUniqueGamePiece.add(new GamePieceProjector());
 			ListOfUniqueGamePiece.add(new GamePieceReceiver());
-			ListOfUniqueGamePiece.add(new GamePieceMirror(false));
 			ListOfUniqueGamePiece.add(new GamePieceMirror(true));
+			ListOfUniqueGamePiece.add(new GamePieceMirror(false));
 			ListOfUniqueGamePiece.add(new GamePieceWall());
 			ListOfUniqueGamePiece.add(new GamePieceEmpty());
 			
@@ -102,9 +102,17 @@ public abstract class GamePiece {
 	}
 	
 	// -- static methods
-	public static GamePiece nextGamePiece(int ID) {
-		ID = (ID+1) % GamePiece.getUniqueGamePieceCount();
-		return GamePiece.getListOfUniqueGamePiece().get(ID).clone();
+	public static GamePiece nextGamePiece(int hash) {
+		init();
+		
+		for (int i = 0; i < UniqueGamePieceCount; i++) {
+			System.out.print(ListOfUniqueGamePiece.get(i).getHash() + " ");
+			if (ListOfUniqueGamePiece.get(i).getHash() == hash) {
+				int idx = (i + 1) % UniqueGamePieceCount;
+				return GamePiece.ListOfUniqueGamePiece.get(idx).clone();
+			}
+		}
+		return null;
 	}
 	
 	// -- abstract methods
