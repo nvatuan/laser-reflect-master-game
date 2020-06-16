@@ -33,7 +33,6 @@ public abstract class GamePiece {
 	public static void init() {
 		if (!_init) {
 			ListOfUniqueGamePiece = new ArrayList<GamePiece>();
-			//hashToPiece = new HashMap<Integer, GamePiece>();
 			
 			ListOfUniqueGamePiece.add(new GamePieceProjector());
 			ListOfUniqueGamePiece.add(new GamePieceReceiver());
@@ -83,7 +82,7 @@ public abstract class GamePiece {
 		// -- generate hash
 		hash = piece;
 		if (piece == GamePiece.PIECE_WALL || piece == GamePiece.PIECE_EMPTY) {
-			return hash;
+			return hash * -1;
 		} else {
 			hash *= 10;
 			hash += (rot ? 1 : 0);

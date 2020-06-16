@@ -118,4 +118,36 @@ public class Tests {
 		lvl.setLevelDescription("Test 2");
 		return lvl;
 	}
+	
+	public static Level TestGuiDebug() {
+		GamePiece[][] M = new GamePiece[5][4];
+		M[0][0] = new GamePieceProjector(GamePiece.ORIENT_UP);
+		M[0][1] = new GamePieceProjector(GamePiece.ORIENT_RIGHT);
+		M[0][2] = new GamePieceProjector(GamePiece.ORIENT_DOWN);
+		M[0][3] = new GamePieceProjector(GamePiece.ORIENT_LEFT);
+		
+		M[1][0] = new GamePieceReceiver(GamePiece.ORIENT_UP);
+		M[1][1] = new GamePieceReceiver(GamePiece.ORIENT_RIGHT);
+		M[1][2] = new GamePieceReceiver(GamePiece.ORIENT_DOWN);
+		M[1][3] = new GamePieceReceiver(GamePiece.ORIENT_LEFT);
+		
+		M[2][0] = new GamePieceMirror(true, GamePiece.ORIENT_UP);
+		M[2][1] = new GamePieceMirror(true, GamePiece.ORIENT_RIGHT);
+		M[2][2] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[2][3] = new GamePieceMirror(true, GamePiece.ORIENT_LEFT);
+				
+		M[3][0] = new GamePieceMirror(false, GamePiece.ORIENT_UP);
+		M[3][1] = new GamePieceMirror(false, GamePiece.ORIENT_RIGHT);
+		M[3][2] = new GamePieceMirror(false, GamePiece.ORIENT_DOWN);
+		M[3][3] = new GamePieceMirror(false, GamePiece.ORIENT_LEFT);
+		
+		M[4][0] = new GamePieceEmpty();
+		M[4][1] = new GamePieceWall();
+		M[4][2] = new GamePieceEmpty();
+		M[4][3] = new GamePieceWall();
+		
+		Level lvl = new Level(M);
+		lvl.setLevelDescription("Test Debug Gui");
+		return lvl;
+	}
 }
