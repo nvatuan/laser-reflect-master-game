@@ -6,7 +6,7 @@ import gameplay.LevelEditor;
 public class Tester {
 
 	public static void main(String[] args) {
-		Level lvl = Tests.Test5();
+		Level lvl = Stages.Stage5();
 		lvl.launchPlay();
 	}
 	

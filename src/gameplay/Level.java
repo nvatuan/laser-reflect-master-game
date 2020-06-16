@@ -2,8 +2,9 @@ package gameplay;
 
 import gamepiece.*;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import datastruct.PairXY;
@@ -125,62 +126,91 @@ public class Level {
 	public  ArrayList<PairXY> getsolvedMirror(int idx) { return this.solvedMirror.get(idx); }
 	public  ArrayList<Integer> getsolvedMirrorOrientation(int idx) { return this.solvedMirrorOrientation.get(idx); }
 
+	private HashSet<String> visitedMirrors;
 	// methods
-	private boolean[][] visited = new boolean[0][0];
-	private boolean findSolution(LaserDirection cursor, boolean[][] locked, int X, int Y, boolean init) {
+	private boolean findSolution(LaserDirection cursor, boolean[][] locked, int X, int Y, boolean init, int depth, HashSet<String> reached) {
 		if (init) {
 			solvedMirror.add(new ArrayList<PairXY>());
 			solvedMirrorOrientation.add(new ArrayList<Integer>());
 			solvedMirrorSize++;
-			visited = new boolean[height][width];
+			visitedMirrors = new HashSet<String>();		
 		}
 		// -- check W/L conditions
 		assert(!cursor.isStuck());
-		//System.out.println("@findSolution: X = " + X + " | Y = " + Y);
-		//System.out.println(cursor.toString());
+		System.out.println("@findSolution: X = " + X + " | Y = " + Y + " | depth = " + depth);
+		System.out.println(cursor.toString());
+
+		int newX = X;
+		int newY = Y;
 		
-		visited[X][Y] = true;
-		if (cursor.isWin()) return true;
-		if (cursor.isLose()) return false;
-		
-		// increments
-		int newX = X + cursor.getDx();
-		int newY = Y + cursor.getDy();
-		
-		// -- check borders
-		if (newX < 0 || newX == this.height) return false;
-		if (newY < 0 || newY == this.width) return false;
-		if (visited[newX][newY]) return false;
+		while (true) {
+			if (cursor.isWin()) {
+				reached.add(new PairXY(newX, newY).toString());
+				return true;
+			}
+			if (cursor.isLose()) return false;
+			// increments
+			newX = newX + cursor.getDx();
+			newY = newY + cursor.getDy();
+			
+			// -- check borders
+			if (newX < 0 || newX == this.height) return false;
+			if (newY < 0 || newY == this.width) return false;
+			
+			if(this.map[newX][newY].getPieceID() == GamePiece.PIECE_MIRROR) break;
+			cursor = this.map[newX][newY].bounce(cursor);
+		}
 		
 		// -- get laser direction
 		// - rotate mirrors....
 		
 		if ((this.map[newX][newY].getPieceID() == GamePiece.PIECE_MIRROR) && 
 		   (locked[newX][newY] == false)) {
+			PairXY p = new PairXY(newX, newY);
+			if (visitedMirrors.contains(p.toString())) {
+				System.out.println("Mirror " + p.toString() + " is visited.");
+				return false;
+			}
+			visitedMirrors.add(p.toString());
+			
 			GamePieceMirror piece = new GamePieceMirror((GamePieceMirror)this.map[newX][newY]);
 			for (int rt = 0; rt < 4; rt++) {
 				piece.rotate();
+				System.out.println("@rotating: X = " + newX + " | Y = " + newY + " | depth = " + depth);
+				
 				LaserDirection newCursor = piece.bounce(cursor);
+				if (newCursor.isLose()) continue;
 				// -- try
-				if (findSolution(newCursor, locked, newX, newY, false)) {
-					solvedMirror.get(solvedMirrorSize - 1).add(new PairXY(newX, newY));
-					solvedMirrorOrientation.get(solvedMirrorSize - 1).add(Integer.valueOf(piece.getOrientation()));
-					locked[newX][newY] = true;
-					return true;
+				if (findSolution(newCursor, locked, newX, newY, false, depth + 1, reached)) {
+					//solvedMirror.get(solvedMirrorSize - 1).add(new PairXY(newX, newY));
+					//solvedMirrorOrientation.get(solvedMirrorSize - 1).add(Integer.valueOf(piece.getOrientation()));
+					//locked[newX][newY] = true;
+					//return true; // comment this broke the above 2 lines
 				}
 			}
+			
+			visitedMirrors.remove(p.toString());
 		} else {
 			LaserDirection newCursor = this.map[newX][newY].bounce(cursor);
-			if (findSolution(newCursor, locked, newX, newY, false)) return true;
+			//if (findSolution(newCursor, locked, newX, newY, false, depth + 1)) return true;
+			findSolution(newCursor, locked, newX, newY, false, depth + 1, reached);
 		}
 		
 		// -- no
+		//return false;
 		return false;
 	}
 	
 	// -- count how may solutions this level has, zero if impossible.
 	//public int countSolution() {
+	private GamePiece[][] checkedMap = null;
+	private boolean isSolved = false;
+	
+	private ArrayList<HashSet<String>> receiverReached;
 	public boolean solve() {
+		if (checkedMap == this.map) return isSolved;
+		else checkedMap = this.map;
+		//
 		updateProjectorData();
 		updateReceiverData();		
 		// with countless times of testing, thesis stating and attempt proving,
@@ -188,7 +218,10 @@ public class Level {
 		// there is only 1 solution.
 		// One Projector can only hit One Receiver, at max, with any mirror-configuration.
 		// And, there is only One Mirror configuration for a pair of Projector and Receiver. (meaning 1 solution).
-		if (this.projectorCount > this.receiverCount) return false;
+		// edit1: this might be wrong..
+		if (this.projectorCount < this.receiverCount) return false;
+		
+		receiverReached = new ArrayList<HashSet<String>>();
 		
 		boolean[][] locked = new boolean[height][width];
 		for (int ih = 0; ih < height; ih ++)
@@ -200,16 +233,48 @@ public class Level {
 		solvedMirrorSize = 0;
 	
 		// runs
+		int recvCount = this.receiverCount;
 		for (int i = 0; i < this.projectorCount; i++) {
 			int ih = projectorCoord.get(i).X;
 			int iw = projectorCoord.get(i).Y;
+			receiverReached.add(new HashSet<String>());
 			
 			LaserDirection cursor = this.map[ih][iw].bounce(null);
 			
-			boolean possible = findSolution(cursor, locked, ih, iw, true);
-			if (possible == false) return false;
+//			boolean possible = findSolution(cursor, locked, ih, iw, true, 0, receiverReached.get(i));
+//			if (possible == true) {
+//				recvCount--;
+//			}
+			findSolution(cursor, locked, ih, iw, true, 0, receiverReached.get(i));
 		}
-		return true;
+		// -- before multiple receivers
+//		if (recvCount > 0) {
+//			isSolved = false;
+//		} else {
+//			isSolved = true;
+//		}		
+//		return isSolved;
+		
+		// -- multiple receivers, no solution writing available..
+		HashSet<String> combine = new HashSet<String>();
+		for (int i = 0; i < this.projectorCount; i++) {
+			Iterator<String> it = receiverReached.get(i).iterator();
+		    while(it.hasNext()){
+		       combine.add(it.next());
+		    }
+		}
+//		Iterator<String> it = combine.iterator();
+//		System.out.println("RECEIVERS SET: ");
+//	    while(it.hasNext()){
+//	       System.out.println(it.next());
+//	    }
+		
+		if (combine.size() >= receiverCount) {
+			isSolved = true;
+		} else {
+			isSolved = false;
+		}
+		return isSolved;
 	}
 	
 	// -- write solution to level
@@ -227,7 +292,6 @@ public class Level {
 			}
 		}
 	}
-	
 	// -- actual playing methods	
 	private LaserDirection[][] laserMap = null;
 	
@@ -246,7 +310,6 @@ public class Level {
 		while (status == Level.STATUS_ONGOING) {
 			status = this.testSolution(laserMap);
 			if (status == Level.STATUS_WIN) {
-				win();
 				break;
 			}
 			
@@ -268,7 +331,6 @@ public class Level {
 		
 		return true;
 	}
-	
 	public boolean issueCommand(String[] inputs) {
 		if (inputs[0].equals("EXIT")) {
 			System.out.println("Exiting..");
@@ -294,8 +356,13 @@ public class Level {
 		return false;
 	}
 	
-	public static final int STATUS_ONGOING = 0, STATUS_WIN = 1;
+	public static final int STATUS_ONGOING = 0, STATUS_WIN = 1, STATUS_IMPOSSIBLE = -1;
+	
 	public int testSolution(LaserDirection[][] laser) {
+		if (this.solve() == false) {
+			System.out.println("!!! This Level is impossible.");
+			return STATUS_IMPOSSIBLE;
+		}
 		int receiverLeft = this.receiverCount;
 		for (int ip = 0; ip < this.projectorCount; ip++) {
 			int ih = projectorCoord.get(ip).X;
@@ -310,9 +377,9 @@ public class Level {
 					receiverLeft--;
 					break;
 				}
-				
 				ih += cursor.getDx();
 				iw += cursor.getDy();
+				System.out.println("@testSol: " + ih + "|" + iw);
 				
 				if (ih < 0 || ih == this.height) break;
 				if (iw < 0 || iw == this.width) break;
@@ -322,11 +389,6 @@ public class Level {
 		
 		System.out.println("@testSolution: receiverLeft = " + receiverLeft);
 		return (receiverLeft > 0 ? Level.STATUS_ONGOING : Level.STATUS_WIN);
-	}
-	
-	public void win() {
-		// TODO: add victory handling
-		System.out.println("You won.");
 	}
 	
 	// -- overridden methods

@@ -16,7 +16,8 @@ public final class GamePieceProjector extends GamePiece {
 	// -- Override
 	@Override
 	public LaserDirection bounce(LaserDirection arrived) {
-		assert(arrived == null);
+		//assert(arrived == null);
+		if(arrived != null) return LaserDirection.LaserLose;
 		switch (this.orientation) {
 			case GamePiece.ORIENT_UP:
 				return LaserDirection.LaserUp;

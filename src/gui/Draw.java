@@ -2,10 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -102,7 +100,7 @@ public class Draw {
 	}
 	
 	//
-	public final int grid = 100;
+	public final int grid = 200;
 	public static final int offsetX = 5, offsetY = 5;
 	// -- draw
 	public BufferedImage drawMap(GamePiece[][] map) {
@@ -117,19 +115,20 @@ public class Draw {
 		Graphics g = mapImg.getGraphics();
 		
 		// -------- Draw grid
-		g.setColor(Color.WHITE);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, w*grid + offsetY*2, h*grid + offsetX*2);
 		
-		g.setColor(Color.RED);
+		g.setColor(Color.WHITE);
 		g.drawRect(sY, sX, eY, eX);
 
-		for (int i = 1; i < h; i++) {
-			g.drawLine(sY, sX + grid*i, eY + offsetY, sX + grid*i);
-		}
-		
-		for (int i = 1; i < w; i++) {
-			g.drawLine(sY + grid*i, sX, sY + grid*i, eX + offsetX);
-		}
+//		g.setColor(Color.GRAY);
+//		for (int i = 1; i < h; i++) {
+//			g.drawLine(sY, sX + grid*i, eY + offsetY, sX + grid*i);
+//		}
+//		
+//		for (int i = 1; i < w; i++) {
+//			g.drawLine(sY + grid*i, sX, sY + grid*i, eX + offsetX);
+//		}
 		// --
 		int delta = grid - pieceIcon.get(map[0][0].getHash()).getIconHeight();
 		if (delta < 10) delta = 10;
@@ -137,8 +136,8 @@ public class Draw {
 		
 		for (int ih = 0; ih < h; ih++) {
 			for (int iw = 0; iw < w; iw++) {
-				System.out.print(map[ih][iw].getHash() + " ");
-				if (iw + 1 == w) System.out.println("");
+				//System.out.print(map[ih][iw].getHash() + " ");
+				//if (iw + 1 == w) System.out.println("");
 				
 				ImageIcon icon = pieceIcon.get(map[ih][iw].getHash());
 				int x1 = ((iw * grid)) + offsetX;

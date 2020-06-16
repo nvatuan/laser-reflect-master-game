@@ -101,6 +101,12 @@ public abstract class GamePiece {
 		return GamePiece.PIECE_NAME[this.pieceID] + ", rotatable = " + this.rotatable; 
 	}
 	
+	// -- static methods
+	public static GamePiece nextGamePiece(int ID) {
+		ID = (ID+1) % GamePiece.getUniqueGamePieceCount();
+		return GamePiece.getListOfUniqueGamePiece().get(ID).clone();
+	}
+	
 	// -- abstract methods
 	abstract public LaserDirection bounce(LaserDirection arrived);
 	abstract public boolean rotate();

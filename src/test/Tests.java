@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Random;
+
 import gamepiece.GamePiece;
 import gamepiece.GamePieceEmpty;
 import gamepiece.GamePieceMirror;
@@ -93,26 +95,36 @@ public class Tests {
 	}
 	
 	public static Level Test6() {
-		GamePiece[][] M = new GamePiece[4][4];
+		GamePiece[][] M = new GamePiece[5][5];
 		M[0][0] = new GamePieceProjector(GamePiece.ORIENT_DOWN);
-		M[0][1] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
-		M[0][2] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[0][1] = new GamePieceEmpty();
+		M[0][2] = new GamePieceEmpty();
 		M[0][3] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[0][4] = new GamePieceEmpty();
 		
-		M[1][0] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
-		M[1][1] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[1][0] = new GamePieceEmpty();
+		M[1][1] = new GamePieceEmpty();
 		M[1][2] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
-		M[1][3] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[1][3] = new GamePieceEmpty();
+		M[1][4] = new GamePieceEmpty();
 		
-		M[2][0] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[2][0] = new GamePieceEmpty();
 		M[2][1] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
-		M[2][2] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
-		M[2][3] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[2][2] = new GamePieceEmpty();
+		M[2][3] = new GamePieceEmpty();
+		M[2][4] = new GamePieceMirror(true, GamePiece.ORIENT_RIGHT);
 		
 		M[3][0] = new GamePieceReceiver(GamePiece.ORIENT_DOWN);
-		M[3][1] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
-		M[3][2] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[3][1] = new GamePieceEmpty();
+		M[3][2] = new GamePieceEmpty();
 		M[3][3] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[3][4] = new GamePieceEmpty();
+		
+		M[4][0] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[4][1] = new GamePieceEmpty();
+		M[4][2] = new GamePieceEmpty();
+		M[4][3] = new GamePieceMirror(true, GamePiece.ORIENT_DOWN);
+		M[4][4] = new GamePieceEmpty();
 		
 		Level lvl = new Level(M);
 		lvl.setLevelDescription("Test 2");
@@ -148,6 +160,21 @@ public class Tests {
 		
 		Level lvl = new Level(M);
 		lvl.setLevelDescription("Test Debug Gui");
+		return lvl;
+	}
+	
+	public static Level TestRand() {
+		int size = 8;
+		GamePiece[][] M = new GamePiece[size][size];
+		Random rnd = new Random();
+		
+		for (int ih = 0; ih < size; ih++)
+			for (int iw = 0; iw < size; iw++) {
+				int idx = rnd.nextInt(GamePiece.getUniqueGamePieceCount());
+				M[ih][iw] = GamePiece.getListOfUniqueGamePiece().get(idx);
+			}
+		Level lvl = new Level(M);
+		lvl.setLevelDescription("Random");
 		return lvl;
 	}
 }

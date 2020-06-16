@@ -21,8 +21,8 @@ public final class GamePieceReceiver extends GamePiece {
 		flag |= (arrived.isRight() && (this.getOrientation() == GamePiece.ORIENT_RIGHT));
 		flag |= (arrived.isDown() && (this.getOrientation() == GamePiece.ORIENT_DOWN));
 		flag |= (arrived.isLeft() && (this.getOrientation() == GamePiece.ORIENT_LEFT));
-		if (flag) return new LaserDirection(LaserDirection.LaserWin);
-		return new LaserDirection(LaserDirection.LaserLose);
+		if (flag) return LaserDirection.LaserWin;
+		return LaserDirection.LaserLose;
 	}
 	
 	@Override

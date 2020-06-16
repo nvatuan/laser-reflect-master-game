@@ -10,17 +10,24 @@ import javax.swing.JPanel;
 import gameplay.Level;
 import test.Tests;
 
-public class UI_Panel extends JPanel {
+@SuppressWarnings("serial")
+public class ScreenPanel extends JPanel {
 	
 	public Level lvl = null;
+	public boolean editMode = false;
 	
-	public UI_Panel() {
+	public ScreenPanel() {
 		super();
-		switchLevel(Tests.Test5());
+		switchLevel(Tests.TestRand());
+	}
+	public ScreenPanel(Level ref) {
+		super();
+		switchLevel(ref);
 	}
 	
 	public void switchLevel(Level nextLevel) {
 		lvl = nextLevel;
+		editMode = false;
 		repaint();
 	}
 	
@@ -33,9 +40,6 @@ public class UI_Panel extends JPanel {
 		Draw dr = new Draw();
 		BufferedImage img = dr.drawMap(lvl.map);
 
-		
-		int dstA = 0;
-		int dstB = 0;
 		int dstW = d.width;
 		int dstH = d.height;
 		
@@ -43,12 +47,9 @@ public class UI_Panel extends JPanel {
 		int deltaH = (d.height - img.getHeight());
 		
 		if (deltaW < 0) {
-			
 			deltaW = 0;
 		}
 		if (deltaH < 0) {
-			
-			
 			deltaH = 0;
 		}
 		

@@ -13,7 +13,7 @@ public class PairXY implements Comparable<PairXY> {
 	// -- override functions
 	@Override
 	public String toString() {
-		return ("X " + this.X + " | Y = " + this.Y);
+		return (this.X + "|" + this.Y);
 	}
 	
 	@Override

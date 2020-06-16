@@ -7,18 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
 
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.GridBagLayout;
+
 import javax.swing.border.LineBorder;
 
-import test.Tests;
+import gameplay.Level;
+import test.Stages;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -27,13 +25,14 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.Dimension;
 import java.awt.Insets;
-import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
-import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class MainBody extends JFrame {
 
 	private JPanel contentPane;
@@ -57,7 +56,8 @@ public class MainBody extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	UI_Panel panelUI;
+	ScreenPanel panelUI;
+	public ScreenClickHandler mouseHandler;
 	
 	public MainBody() {
 		setTitle("Game?");
@@ -106,7 +106,7 @@ public class MainBody extends JFrame {
 		JButton btnLevel1 = new JButton("1");
 		btnLevel1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelUI.switchLevel(Tests.Test1());
+				panelUI.switchLevel(Stages.Stage1());
 			}
 		});
 		btnLevel1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -118,7 +118,7 @@ public class MainBody extends JFrame {
 		JButton btnLevel2 = new JButton("2");
 		btnLevel2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelUI.switchLevel(Tests.Test2());
+				panelUI.switchLevel(Stages.Stage2());
 			}
 		});
 		btnLevel2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -130,7 +130,7 @@ public class MainBody extends JFrame {
 		JButton btnLevel3 = new JButton("3");
 		btnLevel3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelUI.switchLevel(Tests.Test3());
+				panelUI.switchLevel(Stages.Stage3());
 			}
 		});
 		btnLevel3.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
@@ -140,6 +140,11 @@ public class MainBody extends JFrame {
 		panelLevels.add(btnLevel3);
 		
 		JButton btnLevel4 = new JButton("4");
+		btnLevel4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelUI.switchLevel(Stages.Stage4());
+			}
+		});
 		btnLevel4.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLevel4.setBackground(SystemColor.controlHighlight);
 		btnLevel4.setMargin(new Insets(0, 0, 0, 0));
@@ -147,6 +152,11 @@ public class MainBody extends JFrame {
 		panelLevels.add(btnLevel4);
 		
 		JButton btnLevel5 = new JButton("5");
+		btnLevel5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelUI.switchLevel(Stages.Stage5());
+			}
+		});
 		btnLevel5.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnLevel5.setBackground(SystemColor.controlHighlight);
 		btnLevel5.setMargin(new Insets(0, 0, 0, 0));
@@ -175,6 +185,12 @@ public class MainBody extends JFrame {
 		panelEditor.setLayout(new GridLayout(0, 1, 2, 2));
 		
 		JButton btnEditMode = new JButton("ENABLE EDIT MODE");
+		btnEditMode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelUI.editMode = true;
+				panelUI.switchLevel(new Level(6, 6));
+			}
+		});
 		btnEditMode.setBackground(SystemColor.controlHighlight);
 		btnEditMode.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		btnEditMode.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -203,10 +219,30 @@ public class MainBody extends JFrame {
 		lblOther.setAlignmentX(0.5f);
 		panelOther.add(lblOther);
 		
-		panelUI = new UI_Panel();
+		panelUI = new ScreenPanel();
+		
+		mouseHandler = new ScreenClickHandler(panelUI);
+		panelUI.addMouseListener(mouseHandler);
+		
 		panelUI.setBorder(new LineBorder(SystemColor.info, 3));
 		
-		contentPane.add(panelUI, BorderLayout.CENTER);
+		JPanel UIContainer = new JPanel(new GridBagLayout());
+		UIContainer.add(panelUI);
+		UIContainer.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                resizePreview(panelUI, UIContainer);
+            }
+        });
+		
+		contentPane.add(UIContainer, BorderLayout.CENTER);
 	}
-
+	
+    private static void resizePreview(JPanel innerPanel, JPanel container) {
+        int w = container.getWidth();
+        int h = container.getHeight();
+        int size =  Math.min(w, h);
+        innerPanel.setPreferredSize(new Dimension(size, size));
+        container.revalidate();
+    }
 }

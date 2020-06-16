@@ -1,13 +1,13 @@
 package test;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class TestImageLoad extends JFrame {
 	
 	ImageIcon image;
