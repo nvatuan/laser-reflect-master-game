@@ -5,7 +5,12 @@ import gameplay.LevelEditor;
 
 public class Tester {
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
+		Level lvl = Tests.Test5();
+		lvl.launchPlay();
+	}
+	
+	public static void testLevelEditor() {
 		Level lvl = Tests.Test3();
 		LevelEditor editor = new LevelEditor(lvl);
 		

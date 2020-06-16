@@ -3,6 +3,7 @@ package gameplay;
 import gamepiece.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import datastruct.PairXY;
 
@@ -229,7 +230,10 @@ public class Level {
 	
 	// -- actual playing methods	
 	public boolean launchPlay() {
-		if (this.solve() == false) return false;
+		if (this.solve() == false) {
+			System.out.println("!!! This Level is impossible.");
+			return false;
+		}
 		// -- 
 		LaserDirection[][] laser = new LaserDirection[height][width];
 		for (int ih = 0; ih < height; ih++)
@@ -243,6 +247,13 @@ public class Level {
 				win();
 				break;
 			}
+			// -- debugging..
+			System.out.println(this);
+			System.out.print("<< ");
+			Scanner sc = new Scanner(System.in);
+			String line = sc.nextLine().trim();
+			String[] inputs = line.split("\\s+");
+			if (issueCommand(inputs)) break;
 		}
 		
 		return true;
@@ -253,18 +264,58 @@ public class Level {
 			System.out.println("Exiting..");
 			return true;
 		}
-		//
+		
+		System.out.println("@Level @issueCommand: " + inputs[0] + "|" + inputs[1] + "|" + inputs[2]);
+		try {
+			int x = Integer.parseInt(inputs[1]);
+			int y = Integer.parseInt(inputs[2]);
+			
+			if (inputs[0].equals("ROTATE")) {
+				System.out.println("@issueCommand: rotating..");
+				if (!this.map[x][y].rotate()) {
+					// TODO:
+					System.out.println("Cannot rotate this piece.");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return false;
 	}
 	
 	public static final int STATUS_ONGOING = 0, STATUS_WIN = 1;
 	public int testSolution(LaserDirection[][] laser) {
-		// TODO:
-		return 0;
+		// TODO: test
+		int receiverLeft = this.receiverCount;
+		for (int ip = 0; ip < this.projectorCount; ip++) {
+			int ih = projectorCoord.get(ip).X;
+			int iw = projectorCoord.get(ip).Y;
+			
+			LaserDirection cursor = this.map[ih][iw].bounce(null);
+			while (true) {
+				if (cursor.isLose()) break;
+				if (cursor.isWin()) {
+					receiverLeft--;
+					break;
+				}
+				
+				ih += cursor.getDx();
+				iw += cursor.getDy();
+				
+				if (ih < 0 || ih == this.height) break;
+				if (iw < 0 || iw == this.width) break;
+				cursor = this.map[ih][iw].bounce(cursor);
+			}
+		}
+		
+		System.out.println("@testSolution: receiverLeft = " + receiverLeft);
+		return (receiverLeft > 0 ? Level.STATUS_ONGOING : Level.STATUS_WIN);
 	}
 	
 	public void win() {
 		// TODO:
+		System.out.println("You won.");
 	}
 	
 	// -- overridden methods
