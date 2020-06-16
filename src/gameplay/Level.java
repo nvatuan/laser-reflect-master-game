@@ -227,7 +227,6 @@ public class Level {
 		}
 	}
 	
-	
 	// -- actual playing methods	
 	public boolean launchPlay() {
 		if (this.solve() == false) {
@@ -247,6 +246,14 @@ public class Level {
 				win();
 				break;
 			}
+			
+			System.out.println("Laser =");
+			for (int ih = 0; ih < height; ih++)
+				for (int iw = 0; iw < width; iw++) {
+					System.out.print(laser[ih][iw] + " ");
+					if (iw + 1 == width) System.out.println("");
+				}
+			
 			// -- debugging..
 			System.out.println(this);
 			System.out.print("<< ");
@@ -273,7 +280,7 @@ public class Level {
 			if (inputs[0].equals("ROTATE")) {
 				System.out.println("@issueCommand: rotating..");
 				if (!this.map[x][y].rotate()) {
-					// TODO:
+					// TODO: add unrotatable event handling here;
 					System.out.println("Cannot rotate this piece.");
 				}
 			}
@@ -286,7 +293,6 @@ public class Level {
 	
 	public static final int STATUS_ONGOING = 0, STATUS_WIN = 1;
 	public int testSolution(LaserDirection[][] laser) {
-		// TODO: test
 		int receiverLeft = this.receiverCount;
 		for (int ip = 0; ip < this.projectorCount; ip++) {
 			int ih = projectorCoord.get(ip).X;
@@ -294,6 +300,8 @@ public class Level {
 			
 			LaserDirection cursor = this.map[ih][iw].bounce(null);
 			while (true) {
+				laser[ih][iw] = cursor;
+				
 				if (cursor.isLose()) break;
 				if (cursor.isWin()) {
 					receiverLeft--;
@@ -314,7 +322,7 @@ public class Level {
 	}
 	
 	public void win() {
-		// TODO:
+		// TODO: add victory handling
 		System.out.println("You won.");
 	}
 	
