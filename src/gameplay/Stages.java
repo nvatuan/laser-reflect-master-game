@@ -1,4 +1,4 @@
-package test;
+package gameplay;
 
 import java.util.Random;
 
@@ -8,7 +8,6 @@ import gamepiece.GamePieceMirror;
 import gamepiece.GamePieceProjector;
 import gamepiece.GamePieceReceiver;
 import gamepiece.GamePieceWall;
-import gameplay.Level;
 
 public class Stages {
 	public static Random rnd = new Random();

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gameplay.Level;
-import test.Stages;
+import gameplay.Stages;
 import test.Tests;
 
 @SuppressWarnings("serial")

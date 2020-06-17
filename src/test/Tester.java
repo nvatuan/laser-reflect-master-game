@@ -2,6 +2,7 @@ package test;
 
 import gameplay.Level;
 import gameplay.LevelEditor;
+import gameplay.Stages;
 
 public class Tester {
 

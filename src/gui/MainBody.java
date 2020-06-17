@@ -21,7 +21,7 @@ import database.DatabaseComm;
 import event.ScreenClickHandler;
 import event.SqlHandler;
 import gameplay.Level;
-import test.Stages;
+import gameplay.Stages;
 
 import java.awt.Color;
 import java.awt.Component;
