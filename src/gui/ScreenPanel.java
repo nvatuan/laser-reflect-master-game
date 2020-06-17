@@ -19,8 +19,8 @@ public class ScreenPanel extends JPanel {
 	
 	public ScreenPanel() {
 		super();
-		//switchLevel(Stages.Stage1());
-		switchLevel(Tests.Test4());
+		switchLevel(Stages.Stage1());
+		//switchLevel(Tests.Test4());
 	}
 	public ScreenPanel(Level ref) {
 		super();

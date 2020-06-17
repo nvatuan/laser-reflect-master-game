@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>img</name>
-			<type>2</type>
-			<location>D:/P/$rc_code/!eclipse-session/laser-reflect-master-game/img</location>
-		</link>
-	</linkedResources>
 </projectDescription>

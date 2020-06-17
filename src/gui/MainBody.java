@@ -75,7 +75,7 @@ public class MainBody extends JFrame {
 	public JTable resultTable;
 	
 	public MainBody() {
-		setTitle("Laser Reflect Master v0.9");
+		setTitle("Laser Reflect Master");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -88,7 +88,7 @@ public class MainBody extends JFrame {
 		contentPane.add(navPanel, BorderLayout.EAST);
 		navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.Y_AXIS));
 		
-		JLabel lblScreenTitle = new JLabel("New label");
+		JLabel lblScreenTitle = new JLabel("version 0.8");
 		lblScreenTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblScreenTitle.setPreferredSize(new Dimension(200, 40));
 		lblScreenTitle.setMinimumSize(new Dimension(200, 40));
