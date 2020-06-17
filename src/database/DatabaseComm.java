@@ -39,7 +39,7 @@ public class DatabaseComm {
         String password = "root";
         try {
         	conn = DriverManager.getConnection(url, username, password);
-        	System.out.println("Success");
+//        	System.out.println("Success");
 //
 //        	Statement sm = conn.createStatement();
 //          ResultSet rs = sm.executeQuery("SELECT * FROM levels;");

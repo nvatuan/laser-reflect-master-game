@@ -25,22 +25,41 @@ public class SqlHandler implements ActionListener {
 		screen = scr;
 		table = tb;
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 //		JOptionPane.showMessageDialog(null, e.getActionCommand());
+		if (e.getActionCommand() == "SHOW") {
+			showLevel();
+			return;
+		}
 		if (e.getActionCommand() == "LOAD") {
 			loadLevel();
+			showLevel();
 			return;
 		}
 		if (e.getActionCommand() == "DELETE") {
 			deleteLevel();
+			showLevel();
 			return;
 		}
 		if (screen.editMode == false) {
-			JOptionPane.showMessageDialog(null, "You have to be in EDITMODE to do this action.");
+			JOptionPane.showMessageDialog(null, "You have to be Map Maker Mode to do this action.");
 			return;
 		}
 		if (e.getActionCommand() == "ADD") addLevel();
+		showLevel();
+	}
+	
+	public void showLevel() {
+		try {
+			Statement sm = C.getConnection().createStatement();
+			ResultSet rs = sm.executeQuery("SELECT * FROM levels;");
+			
+			table.setModel(DatabaseComm.buildTableModel(rs));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void addLevel() {
@@ -112,7 +131,7 @@ public class SqlHandler implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Please select the Level you want to load on the table.");
 		} else {
 			String query = "DELETE FROM levels\n" 
-				+ "WHERE id = " + selection[0] + ";";
+				+ "WHERE id = " + table.getValueAt(selection[0], 0) + ";";
 			try {
 				Statement sm = C.getConnection().createStatement();
 				sm.execute(query);

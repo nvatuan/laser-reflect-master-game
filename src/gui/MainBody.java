@@ -198,7 +198,7 @@ public class MainBody extends JFrame {
 		panelEditor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelLevelEditor.add(panelEditor, BorderLayout.CENTER);
 		
-		JButton btnEditMode = new JButton("ENABLE EDIT MODE");
+		JButton btnEditMode = new JButton("MAP MAKER MODE");
 		btnEditMode.setPreferredSize(new Dimension(127, 30));
 		btnEditMode.setMinimumSize(new Dimension(127, 30));
 		btnEditMode.setMaximumSize(new Dimension(127, 30));
@@ -206,7 +206,7 @@ public class MainBody extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				panelUI.switchLevel(new Level(4, 4));
 				panelUI.editMode = true;
-				JOptionPane.showMessageDialog(null, "Welcome to Level Maker\n" + "use Mouse1 and Mouse2 to edit tiles\n" + "Map's size is locked at 4x4.");
+				JOptionPane.showMessageDialog(null, "Welcome to Map Maker\n" + "use Mouse1 and Mouse2 to edit tiles\n" + "Map's size is locked at 4x4.");
 			}
 		});
 		panelEditor.setLayout(new BorderLayout(0, 0));
@@ -248,18 +248,10 @@ public class MainBody extends JFrame {
 		btnSQLDelete.setMargin(new Insets(0, 0, 0, 0));
 		panel.add(btnSQLDelete);
 		
-		JButton btnSQLTestConnect = new JButton("TRY CONNECT");
+		JButton btnSQLTestConnect = new JButton("SHOW");
 		btnSQLTestConnect.setBackground(SystemColor.controlHighlight);
 		btnSQLTestConnect.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		btnSQLTestConnect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DatabaseComm C = new DatabaseComm();
-				C.tryConnect();
-				//scrollPane.revalidate();
-				//resultTable.invalidate();
-				((DefaultTableModel)resultTable.getModel()).fireTableDataChanged();
-			}
-		});
+
 		btnSQLTestConnect.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnSQLTestConnect.setMargin(new Insets(0, 0, 0, 0));
 		panel.add(btnSQLTestConnect);
@@ -305,7 +297,8 @@ public class MainBody extends JFrame {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		
+		//
+		btnSQLTestConnect.addActionListener(new SqlHandler(panelUI, resultTable));
 		btnSQLAdd.addActionListener(new SqlHandler(panelUI, resultTable));
 		btnSQLLoad.addActionListener(new SqlHandler(panelUI, resultTable));
 		btnSQLDelete.addActionListener(new SqlHandler(panelUI, resultTable));
