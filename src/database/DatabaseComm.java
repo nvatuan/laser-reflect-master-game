@@ -33,22 +33,18 @@ public class DatabaseComm {
         }
 	}
 	
-	public DatabaseComm() throws IllegalStateException {
+	public DatabaseComm(boolean supressNotify) throws IllegalStateException {
         String url = "jdbc:mysql://localhost:3306/level_database";
         String username = "root";
         String password = "root";
+        String details = "url=" + url + "\nusername=" + username +"\npassword=" + password;
         try {
         	conn = DriverManager.getConnection(url, username, password);
-//        	System.out.println("Success");
-//
-//        	Statement sm = conn.createStatement();
-//          ResultSet rs = sm.executeQuery("SELECT * FROM levels;");
-//            
-//            JTable tb = new JTable(buildTableModel(rs));
-            //JOptionPane.showMessageDialog(null, new JScrollPane(tb));
-        	
+
+        	if (supressNotify) JOptionPane.showMessageDialog(null, "Connect Succeeded.\n" + details);
         } catch (SQLException e) {
-	        throw new IllegalStateException("Cannot connect the database!", e);
+	        //throw new IllegalStateException("Cannot connect the database!", e);
+        	if (supressNotify) JOptionPane.showMessageDialog(null, "Connect Failed!\n" + details);
 	    }
 	}
 	

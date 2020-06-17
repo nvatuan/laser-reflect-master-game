@@ -17,11 +17,14 @@ import gui.ScreenPanel;
 
 public class SqlHandler implements ActionListener {
 	
-	DatabaseComm C = new DatabaseComm();
+	static DatabaseComm C = null;
 	ScreenPanel screen;
 	JTable table;
 	
 	public SqlHandler(ScreenPanel scr, JTable tb) {
+		if (C == null) {
+			C = new DatabaseComm(true);
+		}
 		screen = scr;
 		table = tb;
 	}
@@ -29,6 +32,7 @@ public class SqlHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 //		JOptionPane.showMessageDialog(null, e.getActionCommand());
 		if (e.getActionCommand() == "SHOW") {
+			C.tryConnect();
 			showLevel();
 			return;
 		}

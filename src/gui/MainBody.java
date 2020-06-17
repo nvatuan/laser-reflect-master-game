@@ -281,27 +281,29 @@ public class MainBody extends JFrame {
 		
 		contentPane.add(UIContainer, BorderLayout.CENTER);
 		
-		// --
+		resultTable = new JTable();
+		resultTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane = new JScrollPane(resultTable);
+		scrollPane.setPreferredSize(new Dimension(200, 10));
 		
+		panelOther.add(scrollPane, BorderLayout.CENTER);
+		
+		// -- first connection try
 		try {
-			DatabaseComm com = new DatabaseComm();
+			DatabaseComm com = new DatabaseComm(false);
 			Statement sm;
 			sm = com.getConnection().createStatement();
 			ResultSet rs = sm.executeQuery("SELECT * FROM levels;");
-			resultTable = new JTable(DatabaseComm.buildTableModel(rs));
-			resultTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			
-			scrollPane = new JScrollPane(resultTable);
-			scrollPane.setPreferredSize(new Dimension(200, 10));
-			panelOther.add(scrollPane, BorderLayout.CENTER);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+			resultTable.setModel(DatabaseComm.buildTableModel(rs));
+		} catch (Exception e1) {
+			//e1.printStackTrace();
 		}
-		//
+		
 		btnSQLTestConnect.addActionListener(new SqlHandler(panelUI, resultTable));
 		btnSQLAdd.addActionListener(new SqlHandler(panelUI, resultTable));
 		btnSQLLoad.addActionListener(new SqlHandler(panelUI, resultTable));
 		btnSQLDelete.addActionListener(new SqlHandler(panelUI, resultTable));
+		System.out.println("Finished init MainBody");
 	}
 	
     private static void resizePreview(JPanel innerPanel, JPanel container) {

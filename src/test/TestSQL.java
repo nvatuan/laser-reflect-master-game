@@ -53,7 +53,7 @@ public class TestSQL extends JFrame {
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DatabaseComm C = new DatabaseComm();
+				DatabaseComm C = new DatabaseComm(false);
 				
 				Statement sm;
 				try {
@@ -72,7 +72,7 @@ public class TestSQL extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		DatabaseComm C = new DatabaseComm();
+		DatabaseComm C = new DatabaseComm(false);
 		Statement sm;
 		try {
 			sm = C.getConnection().createStatement();
