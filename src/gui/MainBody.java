@@ -75,7 +75,7 @@ public class MainBody extends JFrame {
 	public JTable resultTable;
 	
 	public MainBody() {
-		setTitle("Game?");
+		setTitle("Laser Reflect Master v0.9");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();

@@ -123,24 +123,28 @@ public abstract class GamePiece {
 	// -- static methods
 	public static GamePiece nextGamePiece(int hash) {
 		init();
-		Set<Integer> s = hashToPiece.keySet();
-		Iterator<Integer> it = s.iterator();
-		
-		int[] hsh = new int[s.size()];
-		int idx = 0;
-		while (it.hasNext()) {
-			hsh[idx] = it.next();
-			idx++;
-		}
-		
-		for (int i = 0; i < hsh.length; i++) {
-			if (hsh[i] == hash) {
-				int ii = (i + 1) % hsh.length;
-				return hashToPiece.get(hsh[ii]).clone();
+//		Set<Integer> s = hashToPiece.keySet();
+//		Iterator<Integer> it = s.iterator();
+//		
+//		int[] hsh = new int[s.size()];
+//		int idx = 0;
+//		while (it.hasNext()) {
+//			hsh[idx] = it.next();
+//			idx++;
+//		}
+//		
+//		for (int i = 0; i < hsh.length; i++) {
+//			if (hsh[i] == hash) {
+//				int ii = (i + 1) % hsh.length;
+//				return hashToPiece.get(hsh[ii]).clone();
+//			}
+//		}
+		for (int i = 0; i < UniqueGamePieceCount; i++) {
+			if (hash == ListOfUniqueGamePiece.get(i).getHash()) {
+				return ListOfUniqueGamePiece.get((i + 1) % UniqueGamePieceCount).clone();
 			}
 		}
-				
-		return null;
+		return ListOfUniqueGamePiece.get(0).clone();
 	}
 	
 	// -- abstract methods
