@@ -52,7 +52,7 @@ I don't think there is anything to say in this part. For me, this phase is kind 
 It turns out great. I had to cut some features so I could make it to the deadline. I ended up submitting version 0.8 to the teacher, which has everything but the drawing laser feature. You could read about the version in the `\release` section. Although i did make a mistake here, levels that are created by the user is actually playable..
 
 ## 2020 Jul 20th Update:
-Today I worked a little bit on the drawing laser feature. It's not the flashiest thing, but It looks kinda nice :v I want to finished this soon and close it already haha.
+Today I worked a little bit on the drawing laser feature. It's not the flashiest thing, but It looks kinda nice :v I want to finish this soon and close it already haha.
 
 Not what i was going for, but this will work.
 
