@@ -37,7 +37,7 @@ I sketched a lot of ideas, so I know beforehand which feature is core, which fea
 With this sketch, I have a general idea how to approach the project with such little time and with no firsthand experience before.
 
 ### My IDE
-Usually, I'd prefer to not use any good IDE that conviently construct and organize a code project for me like `Eclipse`, jetbrains's like `IntelliJ`. I like fooling around with how to organize my own codes but this time I want to try out how convient it is.
+Usually, I'd prefer to not use any good IDE that conveniently construct and organize a code project for me like `Eclipse`, jetbrains's like `IntelliJ`. I like fooling around with how to organize my own codes but this time I want to try out how convenient it is.
 
 `Eclipse` is unexpectedly great. I coded with its default light theme :). It supports `git` and such, making my life way easier. Generally I could understand its menu layout so i could use it much without looking up too often.
 
