@@ -295,7 +295,7 @@ public class Level {
 		}
 	}
 	// -- actual playing methods	
-	private LaserDirection[][] laserMap = null;
+	public LaserDirection[][] laserMap = null;
 	
 	public boolean launchPlay() {
 		if (this.solve() == false) {

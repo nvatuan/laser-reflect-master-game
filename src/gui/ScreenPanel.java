@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -67,10 +68,28 @@ public class ScreenPanel extends JPanel {
 //		}
 //		JOptionPane.showMessageDialog(null, " " + d.width + " | " + d.height);
 //		JOptionPane.showMessageDialog(null, " " + srcW + " | " + srcH);
- 		g.drawImage(img, 
+
+		
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0, 0, d.width, d.height);
+		
+ 		try {
+ 			BufferedImage lsrImg = dr.drawLaserDirectionMap(lvl.laserMap);
+ 			g.drawImage(lsrImg, 
+ 	 			deltaW/2, deltaH/2, dstW - deltaW/2, dstH - deltaH/2,
+ 	 			0, 0, lsrImg.getWidth(), lsrImg.getHeight(),
+ 	 			null
+ 	 		);
+ 		} catch (Exception ex) {
+ 			System.out.println("@ScreenPanel@paintComponent: Exception caught.");
+ 			ex.printStackTrace();
+ 		}
+		
+		g.drawImage(img, 
  			deltaW/2, deltaH/2, dstW - deltaW/2, dstH - deltaH/2,
  			0, 0, img.getWidth(), img.getHeight(),
  			null
  		);
+ 		
 	}
 }
