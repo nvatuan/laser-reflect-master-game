@@ -23,7 +23,7 @@ Because i believe in the magic of stella.
 
 # HOW DID I DO IT
 ## PLANNING
-The most important lesson that magic of stella taught me is to have a plan. It isn't necessary be a perfect one, just one reasonably divides work down to small milestones, where each milestone is needed for some other milestones. 
+The most important lesson that magic of stella taught me is to have a plan. It isn't necessarily be a perfect one, just one reasonably divides work down to small milestones, where each milestone is needed for some other milestones. 
 
 A plan is critical since with it we can keep track of how the project is turning out and keep track of the remaining time.
 
