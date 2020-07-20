@@ -62,6 +62,7 @@ public class ScreenClickHandler extends MouseAdapter {
 				int status = container.lvl.testSolution(container.lvl.laserMap);
 				
 				// -- lsr[][] debug
+				/*
 				System.out.println("@ScreenClickHandler: LaserDirection array debug:");
 				for (int i = 0; i < container.lvl.laserMap.length; i++) {
 					System.out.print("\t");
@@ -70,7 +71,7 @@ public class ScreenClickHandler extends MouseAdapter {
 					}
 					System.out.println("");
 				}
-				
+				*/
 				// -- display message to user
 				if (status == Level.STATUS_WIN) {
 					JOptionPane.showMessageDialog(null, "LEVEL SOLVED!");

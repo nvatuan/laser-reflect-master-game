@@ -82,7 +82,7 @@ public class ScreenPanel extends JPanel {
  	 		);
  		} catch (Exception ex) {
  			System.out.println("@ScreenPanel@paintComponent: Exception caught.");
- 			ex.printStackTrace();
+ 			//ex.printStackTrace();
  		}
 		
 		g.drawImage(img, 

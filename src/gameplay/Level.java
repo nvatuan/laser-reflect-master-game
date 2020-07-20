@@ -139,8 +139,8 @@ public class Level {
 		}
 		// -- check W/L conditions
 		assert(!cursor.isStuck());
-		System.out.println("@findSolution: X = " + X + " | Y = " + Y + " | depth = " + depth);
-		System.out.println(cursor.toString());
+		//System.out.println("@findSolution: X = " + X + " | Y = " + Y + " | depth = " + depth);
+		//System.out.println(cursor.toString());
 
 		int newX = X;
 		int newY = Y;
@@ -178,7 +178,7 @@ public class Level {
 			GamePieceMirror piece = new GamePieceMirror((GamePieceMirror)this.map[newX][newY]);
 			for (int rt = 0; rt < 4; rt++) {
 				piece.rotate();
-				System.out.println("@rotating: X = " + newX + " | Y = " + newY + " | depth = " + depth);
+				//System.out.println("@rotating: X = " + newX + " | Y = " + newY + " | depth = " + depth);
 				
 				LaserDirection newCursor = piece.bounce(cursor);
 				if (newCursor.isLose()) continue;
@@ -381,7 +381,7 @@ public class Level {
 				}
 				ih += cursor.getDx();
 				iw += cursor.getDy();
-				System.out.println("@testSol: " + ih + "|" + iw);
+				//System.out.println("@testSol: " + ih + "|" + iw);
 				
 				if (ih < 0 || ih == this.height) break;
 				if (iw < 0 || iw == this.width) break;
