@@ -88,7 +88,7 @@ public class MainBody extends JFrame {
 		contentPane.add(navPanel, BorderLayout.EAST);
 		navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.Y_AXIS));
 		
-		JLabel lblScreenTitle = new JLabel("version 0.8");
+		JLabel lblScreenTitle = new JLabel("version 0.9");
 		lblScreenTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblScreenTitle.setPreferredSize(new Dimension(200, 40));
 		lblScreenTitle.setMinimumSize(new Dimension(200, 40));

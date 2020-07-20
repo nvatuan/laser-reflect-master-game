@@ -25,29 +25,26 @@ public class Draw {
 	public static void importGamePieceImage() {	
 		if (initImportGamePieceImage == false) {
 			try {
-				String path = (new File("").getAbsolutePath());
-				String prefix = "\\img\\piece\\";
-				//
-				Empty = new ImageIcon(path + prefix + "Empty.png");
-				MirrorDown = new ImageIcon(path + prefix + "MirrorDown.png");
-				MirrorDownLocked = new ImageIcon(path + prefix + "MirrorDownLocked.png");
-				MirrorLeft = new ImageIcon(path + prefix + "MirrorLeft.png");
-				MirrorLeftLocked = new ImageIcon(path + prefix + "MirrorLeftLocked.png");
-				MirrorRight = new ImageIcon(path + prefix + "MirrorRight.png");
-				MirrorRightLocked = new ImageIcon(path + prefix + "MirrorRightLocked.png");
-				MirrorUp = new ImageIcon(path + prefix + "MirrorUp.png");
-				MirrorUpLocked = new ImageIcon(path + prefix + "MirrorUpLocked.png");
-				Projector = new ImageIcon(path + prefix + "Projector.png");
-				ProjectorDown = new ImageIcon(path + prefix + "ProjectorDown.png");
-				ProjectorLeft = new ImageIcon(path + prefix + "ProjectorLeft.png");
-				ProjectorRight = new ImageIcon(path + prefix + "ProjectorRight.png");
-				ProjectorUp = new ImageIcon(path + prefix + "ProjectorUp.png");
-				Receiver = new ImageIcon(path + prefix + "Receiver.png");
-				ReceiverDown = new ImageIcon(path + prefix + "ReceiverDown.png");
-				ReceiverLeft = new ImageIcon(path + prefix + "ReceiverLeft.png");
-				ReceiverRight = new ImageIcon(path + prefix + "ReceiverRight.png");
-				ReceiverUp = new ImageIcon(path + prefix + "ReceiverUp.png");
-				Wall = new ImageIcon(path + prefix + "Wall.png");
+				Empty = new ImageIcon(MainBody.class.getResource("/piece/Empty.png"));
+				MirrorDown = new ImageIcon(Draw.class.getResource("/piece/MirrorDown.png"));
+				MirrorDownLocked = new ImageIcon(Draw.class.getResource("/piece/MirrorDownLocked.png"));
+				MirrorLeft = new ImageIcon(Draw.class.getResource("/piece/MirrorLeft.png"));
+				MirrorLeftLocked = new ImageIcon(Draw.class.getResource("/piece/MirrorLeftLocked.png"));
+				MirrorRight = new ImageIcon(Draw.class.getResource("/piece/MirrorRight.png"));
+				MirrorRightLocked = new ImageIcon(Draw.class.getResource("/piece/MirrorRightLocked.png"));
+				MirrorUp = new ImageIcon(Draw.class.getResource("/piece/MirrorUp.png"));
+				MirrorUpLocked = new ImageIcon(Draw.class.getResource("/piece/MirrorUpLocked.png"));
+				Projector = new ImageIcon(Draw.class.getResource("/piece/Projector.png"));
+				ProjectorDown = new ImageIcon(Draw.class.getResource("/piece/ProjectorDown.png"));
+				ProjectorLeft = new ImageIcon(Draw.class.getResource("/piece/ProjectorLeft.png"));
+				ProjectorRight = new ImageIcon(Draw.class.getResource("/piece/ProjectorRight.png"));
+				ProjectorUp = new ImageIcon(Draw.class.getResource("/piece/ProjectorUp.png"));
+				Receiver = new ImageIcon(Draw.class.getResource("/piece/Receiver.png"));
+				ReceiverDown = new ImageIcon(Draw.class.getResource("/piece/ReceiverDown.png"));
+				ReceiverLeft = new ImageIcon(Draw.class.getResource("/piece/ReceiverLeft.png"));
+				ReceiverRight = new ImageIcon(Draw.class.getResource("/piece/ReceiverRight.png"));
+				ReceiverUp = new ImageIcon(Draw.class.getResource("/piece/ReceiverUp.png"));
+				Wall = new ImageIcon(Draw.class.getResource("/piece/Wall.png"));
 				
 				// -- hash
 				GamePieceProjector prjU = new GamePieceProjector(GamePiece.ORIENT_UP);
