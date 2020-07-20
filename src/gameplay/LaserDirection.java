@@ -45,12 +45,12 @@ public class LaserDirection {
 	// -- toString	
 	@Override
 	public String toString() {
-		if (this.equals(LaserDirection.LaserUp)) return "LaserUp";
-		if (this.equals(LaserDirection.LaserRight)) return "LaserRight";
-		if (this.equals(LaserDirection.LaserDown)) return "LaserDown";
-		if (this.equals(LaserDirection.LaserLeft)) return "LaserLeft";
-		if (this.equals(LaserDirection.LaserWin)) return "LaserWin";
-		if (this.equals(LaserDirection.LaserLose)) return "LaserLose";
+		if (this.equals(LaserDirection.LaserUp)) return "LUp";
+		if (this.equals(LaserDirection.LaserRight)) return "LRight";
+		if (this.equals(LaserDirection.LaserDown)) return "LDown";
+		if (this.equals(LaserDirection.LaserLeft)) return "LLeft";
+		if (this.equals(LaserDirection.LaserWin)) return "LWin";
+		if (this.equals(LaserDirection.LaserLose)) return "LLose";
 		return "Invalid Laser";
 	}
 	

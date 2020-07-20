@@ -1,7 +1,9 @@
 package gui;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import gamepiece.*;
+import gameplay.LaserDirection;
 
 public class Draw {
 	
@@ -113,12 +116,13 @@ public class Draw {
 		int sX = offsetX, sY = offsetY;
 		int eX = h*grid, eY = w*grid;
 		
-		BufferedImage mapImg = new BufferedImage(w*grid + offsetY*2, h*grid + offsetX*2, BufferedImage.TYPE_INT_RGB);
+		BufferedImage mapImg = new BufferedImage(w*grid + offsetY*2, h*grid + offsetX*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = mapImg.getGraphics();
+		Graphics2D g2d = (Graphics2D) g;
 		
 		// -------- Draw grid
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(0, 0, w*grid + offsetY*2, h*grid + offsetX*2);
+		g2d.setColor(new Color(0, 0, 0, 0));
+		g2d.fillRect(0, 0, w*grid + offsetY*2, h*grid + offsetX*2);
 		
 		g.setColor(Color.WHITE);
 		g.drawRect(sY, sX, eY, eX);
@@ -150,5 +154,38 @@ public class Draw {
 		}
 		
 		return mapImg;
+	}
+	
+	public BufferedImage drawLaserDirectionMap(LaserDirection[][] lsr) {
+		int h = lsr.length; int w = lsr[0].length;
+		
+		int sX = offsetX, sY = offsetY;
+		int eX = h*grid, eY = w*grid;
+		
+		BufferedImage lsrImg = new BufferedImage(w*grid + offsetY*2, h*grid + offsetX*2, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = lsrImg.getGraphics();
+		
+		// -------- Draw grid		
+		Graphics2D g2d = (Graphics2D) g;	
+		
+		// -- draw laser here
+		for (int ih = 0; ih < h; ih++) {
+			for (int iw = 0; iw < w; iw++) {
+				if (lsr[ih][iw] != null && !lsr[ih][iw].isLose()) {
+					int x1 = ((iw * grid)) + offsetX;
+					int y1 = ((ih * grid)) + offsetY;
+					int x2 = x1 + grid;
+					int y2 = y1 + grid;
+					
+					int gridOffset = 0;
+					
+					g2d.setColor(new Color(255, 0, 0, 255));
+					g2d.fillRect(x1 + gridOffset, y1 + gridOffset, grid, grid);
+				}
+			}
+		}
+
+		// --		
+		return lsrImg;
 	}
 }

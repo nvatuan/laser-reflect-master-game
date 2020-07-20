@@ -14,8 +14,6 @@ I decided to make a game, where there's like a laserbeam projector, then there's
 
 The goal is to redirect it to a special unit called laserbeam receiver. 
 
-Simple.
-
 I could write a level generator and a level checker, then use those same things in Level Editor, which will Save/Load a level to a SQL Database.
 
 Visionary. I know.
@@ -53,6 +51,16 @@ I don't think there is anything to say in this part. For me, this phase is kind 
 # HOW IT TURNS OUT
 It turns out great. I had to cut some features so I could make it to the deadline. I ended up submitting version 0.8 to the teacher, which has everything but the drawing laser feature. You could read about the version in the `\release` section. Although i did make a mistake here, levels that are created by the user is actually playable..
 
+## 2020 Jul 20th Update:
 Today I worked a little bit on the drawing laser feature. It's not the flashiest thing, but It looks kinda nice :v I want to finished this soon and close it already haha.
 
+Not what i was going for, but this will work.
 
+### Stage 1 demo
+![image](https://user-images.githubusercontent.com/24392632/87946404-291b1000-cacc-11ea-939e-850e03257dc5.png)
+
+### Stage 2 demo
+![image](https://user-images.githubusercontent.com/24392632/87946487-48b23880-cacc-11ea-8e6e-9adb87474584.png)
+
+### Stage 3 demo
+![image](https://user-images.githubusercontent.com/24392632/87946507-51a30a00-cacc-11ea-94bd-0367f996ecb9.png)

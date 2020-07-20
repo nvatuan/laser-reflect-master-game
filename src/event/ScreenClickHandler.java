@@ -54,16 +54,30 @@ public class ScreenClickHandler extends MouseAdapter {
 			if(container.lvl.map[r][c].rotate() == false) {
 				JOptionPane.showMessageDialog(null, "This piece is locked! It can't be rotated");
 			} else {
+				// -- repaint canvas
 				container.repaint();
-				LaserDirection[][] lsr = new LaserDirection[container.lvl.getHeight()][container.lvl.getWidth()];
 				
-				int status = container.lvl.testSolution(lsr); 
+				// -- test solution and write laser trace to laserMap[][]
+				container.lvl.laserMap = new LaserDirection[container.lvl.getHeight()][container.lvl.getWidth()];
+				int status = container.lvl.testSolution(container.lvl.laserMap);
+				
+				// -- lsr[][] debug
+				System.out.println("@ScreenClickHandler: LaserDirection array debug:");
+				for (int i = 0; i < container.lvl.laserMap.length; i++) {
+					System.out.print("\t");
+					for (int j = 0; j < container.lvl.laserMap[0].length; j++) {
+						System.out.print(container.lvl.laserMap[i][j] + "\t");
+					}
+					System.out.println("");
+				}
+				
+				// -- display message to user
 				if (status == Level.STATUS_WIN) {
 					JOptionPane.showMessageDialog(null, "LEVEL SOLVED!");
 				} else
 				if (status == Level.STATUS_IMPOSSIBLE) {
 					JOptionPane.showMessageDialog(null, "This level is impossible.");
-				}
+				}				
 			}
 		}
 	}
