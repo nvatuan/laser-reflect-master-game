@@ -1,4 +1,4 @@
-# ABOUT THE PROJECT
+# About the project
 ## What is this?
 This is my Java Code project which I will turn it in as homework.
 
@@ -21,8 +21,8 @@ Visionary. I know.
 ## Why do i decide to make a game when there is only 4 days remaining?
 Because i believe in the magic of stella.
 
-# HOW DID I DO IT
-## PLANNING
+# Figuring out how should one approach 
+## Planning
 The most important lesson that magic of stella taught me is to have a plan. It isn't necessarily be a perfect one, just one reasonably divides work down to small milestones, where each milestone is needed for some other milestones. 
 
 A plan is critical since with it we can keep track of how the project is turning out and keep track of the remaining time.
@@ -43,12 +43,12 @@ Usually, I'd prefer to not use any good IDE that conveniently construct and orga
 
 I would recommended `Eclipse` if your project is large and organizing source files is tiring to you (my OCD allows me to organize my files with passion :))
 
-## EXECUTING
+## Coding
 I learnt `Java` and its core libraries for about 3 months already before this project, so I can easily see what is possible and what is not. I used plenty from `Java Collections Framework`, `Java AWT` and `Java Swings`.
 
 I don't think there is anything to say in this part. For me, this phase is kind of a blank in my head. I couldn't remember it clearly. I just coded like crazy.
 
-# HOW IT TURNS OUT
+# Results
 It turns out great. I had to cut some features so I could make it to the deadline. I ended up submitting version 0.8 to the teacher, which has everything but the drawing laser feature. You could read about the version in the `\release` section. Although i did make a mistake here, levels that are created by the user is actually playable..
 
 ## 2020 Jul 20th Update:
