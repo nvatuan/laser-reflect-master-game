@@ -18,7 +18,7 @@ I could write a level generator and a level checker, then use those same things 
 
 Visionary. I know.
 
-## Why do i decide to make a game when there is only 4 days remaining?
+## Why did i decide to make a game when there are only 4 days remaining?
 Because i believe in the magic of stella.
 
 # Figuring out how should one approach 
