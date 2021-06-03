@@ -9,13 +9,7 @@ The requirements for the homework are:
 - A paper report to instruct how to install and use your program.
 
 ## What is it specifically?
-I decided to make a game, where there's like a laserbeam projector, then there's a lot of mirror pieces on the board to redirect the laser
-
-The goal is to redirect it to a special unit called laserbeam receiver. 
-
-I could write a level generator and a level checker, then use those same things in Level Editor, which will Save/Load a level to a SQL Database.
-
-Visionary. I know.
+It is a puzzle game. Where the goal is to redirect laser from a Projector to a Receiver, through the usage of many mirror pieces to redirect the laser directions.
 
 # Figuring out the approach 
 ## Planning
